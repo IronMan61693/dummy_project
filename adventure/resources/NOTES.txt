@@ -1,0 +1,63 @@
+NOTES for game
+
+Current project:
+	-Make value a dictionary so things can be worth _ copper _ silver and _ gold
+	-Introduce Armor Class and to hit commun function
+	-Introduce more variables to weapon items (die damage) and main attribute and 1 or two handed
+
+
+General:
+	-Add difficulty
+		-More HP
+		-Hit harder
+		-Vender buys items for less of its value
+	-Make gold useful
+	-A few NPCs
+	-Upon ending map showing where they went
+
+Combat:
+	-More options than attack
+	-Armor
+	-Different weapon types have different attack options
+	-Weapons get damage ranges random.range(a,b) where a and b are the min and max dmg
+		-Likewise enemies should get damage ranges
+	-Add health potions
+	-Dnd style turn by turn
+		-Make different attacks do things from attack harder to have more accuracy
+	-More enemy types
+		-Skeletons (multiple enemies determined by hp, and damage depends on number of enemies)
+	-Resistance/Armor
+	-Shield vs 2 hand
+	-Introduce bow but discard it
+	-Introduce spells
+		-recharges every ___ tiles
+
+
+Map:
+	-Randomize the map
+	-Add different levels
+		-Next to the end of each level have a item buyer and seller
+	-Roaming enemy
+
+Loot:
+	-Variable loot
+	-More items
+	-Weapons with more stats
+		-Damage
+		-Accuracy
+		-Armor penetration
+	-Chest with random item
+		-Potential mimic enemy
+
+Player:
+	-XP
+	-Gold purse
+	-DnD style attributes
+	-Have a weapon equiped
+	-Choose armor
+		-Different armor will be better/have different resistances
+
+Down the road
+	-Magic
+		-MP
+		-Learn spells from items
