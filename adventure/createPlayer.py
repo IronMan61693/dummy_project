@@ -1,6 +1,7 @@
 import random
 
-import Items, World
+import  Items
+
 from Common_Functions import dice_roller
 
 
@@ -33,11 +34,14 @@ class Player():
 
 	"""
 	def __init__(self):
-		self.my_coin_pouch = Items.CoinPouch()
+		self.character_name = "Character"
+		self.player_name = "Zorg"
+		self.character_level = 1
+		self.my_coin_pouch =  Items.CoinPouch()
 		self.my_coin_pouch.add_to_me("Gold", 15)
-		self.inventory = [self.my_coin_pouch, Items.Fist()]
+		self.inventory = [self.my_coin_pouch,  Items.Fist()]
 		self.hp = 100
-		self.location_x, self.location_y =  World.starting_position
+		self.location_x, self.location_y =   (0,0)
 		self.victory = False
 		self.character_class = "No Class"
 		self.strength = 10
@@ -47,7 +51,6 @@ class Player():
 		self.attributes = {"Strength: " : self.strength, "Dexterity: " : self.dexterity,
 							"Constitution: " : self.constitution, "Intellect: " : self.intellect}
 
-		self.moved = False
 
 
 
@@ -93,7 +96,10 @@ class Player():
 		Output:
 			print statement
 		"""
-		print("You have beaten {} tiles!".format(World.how_many_tile()))
+		print("Player: {}".format(self.player_name))
+		print("Character: {}".format(self.character_name))
+		print("Level: {}".format(self.character_level))
+		# print("You have beaten {} tiles!".format(World.how_many_tile()))
 		print("You have {} HP remaining".format(self.hp))
 		print(self.character_class)
 		for key, value in self.attributes.items():
@@ -161,6 +167,56 @@ class Player():
 
 
 
+	def get_character_class(self):
+		return self.character_class
+
+
+
+
+	def set_character_name(self, char_name):
+		"""
+		Changes the player Class instanced variable character_name to the input string
+
+		Input:
+			char_name <str>
+
+		Output:
+			Modifies player instance
+		"""
+		self.character_name = char_name
+
+
+
+	def get_character_name(self):
+		return self.character_name
+
+
+
+	def set_player_name(self, play_name):
+		"""
+		Changes the player Class instanced variable player_name to the input string
+
+		Input:
+			play_name <str>
+
+		Output:
+			Modifies player instance
+		"""
+		self.player_name = play_name
+
+
+
+	def get_player_name(self):
+		return self.player_name
+
+
+
+	def get_character_level(self):
+		return self.character_level
+
+
+
+
 	def move(self, dx, dy):
 		"""
 		basic move method, dx and dy are change in x and y
@@ -174,10 +230,9 @@ class Player():
 		"""
 		self.location_x += dx
 		self.location_y += dy
-		if not World.tile_exists(self.location_x, self.location_y):
-			World.generate_world(self.location_x, self.location_y)
-		print(World.tile_exists(self.location_x, self.location_y).intro_text())
-		self.moved = True
+		# if not  World.tile_exists(self.location_x, self.location_y):
+		# 	World.generate_world(self.location_x, self.location_y)
+		# print(World.tile_exists(self.location_x, self.location_y).intro_text())
 
 
 
@@ -242,7 +297,7 @@ class Player():
 
 		# Finds the most damage weapon in inventory
 		for weap in self.inventory:
-			if isinstance(weap, Items.Weapon):
+			if isinstance(weap,  Items.Weapon):
 				if weap.damage > max_dmg:
 					max_dmg = weap.damage
 					best_weapon = weap

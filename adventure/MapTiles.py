@@ -1,4 +1,4 @@
-import Items, Enemies, Actions, World
+import Items, Enemies, Actions
 import random
 
 class MapTile:
@@ -28,6 +28,9 @@ class MapTile:
 		self.x = x
 		self.y = y
 		self.room_type = 0
+		self.adjacent_movements = self.adjacent_moves()
+		self.all_moves = []
+		self.set_available_actions()
 
 
 
@@ -51,31 +54,40 @@ class MapTile:
 		raise NotImplementedError()
 
 	
-	def adjacent_moves(self, player):
-		if (player.moved):
-			moves = []
+	def adjacent_moves(self):
 
-			moves.append(Actions.MoveNorth())
+		moves = []
 
-			moves.append(Actions.MoveSouth())
+		moves.append(Actions.MoveNorth())
 
-			moves.append(Actions.MoveEast())
+		moves.append(Actions.MoveSouth())
 
-			moves.append(Actions.MoveWest())
+		moves.append(Actions.MoveEast())
+
+		moves.append(Actions.MoveWest())
 
 
-			# random.shuffle(self.moves)
+		random.shuffle(moves)
 
-			# self.moves.pop()
+		remove_move = random.randint(0, 3)
 
-			# self.moves.pop()
+		for removed in range(0, remove_move):
 
-			# player.moved = False
+			moves.pop()
+
 
 		return moves
 
 
-	def available_actions(self, player):
+	def set_available_actions(self):
+		self.all_moves = self.adjacent_movements
+		self.all_moves.append(Actions.ViewInventory())
+		self.all_moves.append(Actions.ViewCharacter())
+		self.all_moves.append(Actions.Quit())
+
+
+
+	def available_actions(self):
 		"""
 		Describes all methods Actions can call in this room
 		 Is default behavior, different tiles(subclasses) will specify more actions
@@ -83,18 +95,9 @@ class MapTile:
 		Output:
 			moves [<Actions>]
 		"""
-		moves = adjacent_moves()
-		moves.append(Actions.ViewInventory())
-		moves.append(Actions.ViewCharacter())
-		moves.append(Actions.Quit())
+				
 
-
-	
-		adjacent_moves()
-			
-		player.moved = False
-
-		return moves
+		return self.all_moves
 
 
 
@@ -132,7 +135,7 @@ class StartingRoom(MapTile):
 		Output:
 			moves [<Actions>]
 		"""
-		
+		moves = []
 
 		moves.append(Actions.MoveNorth())
 
@@ -174,19 +177,10 @@ class GameOverRoom(MapTile):
 		"""
 		pass
 
-	def available_actions(self, player):
-		"""
-		Describes all actions for adjacent tiles, i.e. where player can move
-
-		Output:
-			moves [<Actions>]
-		"""
-		moves = []
-		moves.append(Actions.ViewInventory())
-		moves.append(Actions.ViewCharacter())
-		moves.append(Actions.Quit())
-		
-		return moves
+	def set_available_actions(self):
+		self.all_moves.append(Actions.ViewInventory())
+		self.all_moves.append(Actions.ViewCharacter())
+		self.all_moves.append(Actions.Quit())
 
 
 
@@ -313,6 +307,7 @@ class EnemyRoom(MapTile):
 		super().__init__(x, y)
 		
 		self.room_type = 3
+		self.update_available_actions = True
 
 			
 	def modify_player(self, the_player):
@@ -329,30 +324,34 @@ class EnemyRoom(MapTile):
 
 		else:
 			self.room_type = 4
+			if (self.update_available_actions):
+				self.set_available_actions()
+				self.update_available_actions = False
+				
 
 
-	def available_actions(self, the_player):
+	def set_available_actions(self):
 		"""
 		Changes the base available actions, 
 		 if the enemy is alive only allow the player to attack or flee
 		 otherwise the default moves
 		"""
 		if self.enemy.is_alive():
-			moves = [Actions.Flee(tile=self), Actions.Attack(enemy = self.enemy)]
-			moves.append(Actions.ViewInventory())
-			moves.append(Actions.ViewCharacter())
-			moves.append(Actions.Quit())
+			self.all_moves = [Actions.Flee(tile=self), Actions.Attack(enemy = self.enemy)]
+			self.all_moves.append(Actions.ViewInventory())
+			self.all_moves.append(Actions.ViewCharacter())
+			self.all_moves.append(Actions.Quit())
 
 
 
 		else:
-			moves = adjacent_moves()
-			moves.append(Actions.ViewInventory())
-			moves.append(Actions.ViewCharacter())
-			moves.append(Actions.Quit())
+			self.all_moves = self.adjacent_movements
+			self.all_moves.append(Actions.ViewInventory())
+			self.all_moves.append(Actions.ViewCharacter())
+			self.all_moves.append(Actions.Quit())
 
 
-		return moves
+ 
 
 
 class EmptyCavePath(MapTile):

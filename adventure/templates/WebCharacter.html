@@ -1,0 +1,25 @@
+{% extends "WebBase.html" %}
+
+{% block body %}
+
+	<h1> {{ current_user.username }}'s Characters </h1>
+
+	<table style="width 100%">
+		<tr>
+			<th> Player Name </th>
+			<th> Character Name </th>
+			<th> Class </th>
+			<th> Level </th>
+			<th> Total Tiles </th>
+		</tr> 
+		{% for item in char_scores %}
+		<tr>
+			<td>{{item[0]}}</td>
+			<td>{{item[1]}}</td>
+			<td>{{item[2]}}</td>
+			<td>{{item[3]}}</td>
+			<td>{{item[4]}}</td>
+		</tr>
+		{% endfor %}
+
+{% endblock %}

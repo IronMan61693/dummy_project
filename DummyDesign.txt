@@ -1,0 +1,27 @@
+Main idea for the project:
+
+An interactive dungeon crawler which allows the player the experience of moving through the dungeon via a GUI.
+
+Features:
+
+Required features:
+
+Dynamic graphic display providing information on the state of the game.
+The ability to use a keyboard to interact with the game.
+An inventory which contains and displays the items and currency the player finds in game.
+A character panel which saves the character's information, including health and attributes.
+Save the previous scores, in the form of game tiles, of past games.
+A web interface displaying those scores and the name of the person associated with that score.
+Interactive combat.
+
+Optional features:
+
+Let the player choose GUI or CLI.
+Random/procedurally generated maps.
+A log in feature associating characters with players.
+The ability to save the game itself. (pickle)
+The ability to load a previous game save.
+A web interface showing information on saved games.
+Interactive inventory.
+A leveling system.
+Display the map of a character on the website.

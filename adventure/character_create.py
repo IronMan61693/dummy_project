@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QPushButt
 from PyQt5.QtCore import Qt, QDate, QTime, QDateTime, QThread, pyqtSignal
 from PyQt5.QtGui import QIcon, QPixmap, QPalette, QBrush, QImage, QColor
 
-import Game
+
 
 
 """
@@ -39,7 +39,8 @@ class CharacterCreateWidget(QWidget):
 		constitutionLabel <QLabel>
 		intellectLabel <QLabel>
 		inventoryLabel <QLabel>
-		nameLineEdit <QLineEdit>
+		characterNameLineEdit <QLineEdit>
+		playerNameLineEdit <QLineEdit>
 		classSelectorComboBox <QComboBox>
 		difficultyComboBox <QComboBox>
 		finishPushButton <QPushButton>
@@ -48,10 +49,10 @@ class CharacterCreateWidget(QWidget):
 		classChange
 		difficultyChange
 		finishChange
-		nameChange
+		characterNameChange
 		
 	"""
-	procGameStart = pyqtSignal(int, str)
+	procGameStart = pyqtSignal(int, str, str, str)
 	procCharLabel = pyqtSignal(str)
 	# procRoomDescription = pyqtSignal(str)
 	# procRoomAvailableAction = pyqtSignal(list)
@@ -61,6 +62,8 @@ class CharacterCreateWidget(QWidget):
 		
 
 		self.player_class = "No Class"
+		self.player_name = "Zorg"
+		self.character_name = "Character"
 
 		self.barbarianString = "Barbarian"
 		self.noClassString = "No Class"
@@ -104,7 +107,10 @@ class CharacterCreateWidget(QWidget):
 		self.dateTimeLabel = QLabel(self.dateTime.toString())
 
 		# Changes the name Label
-		self.nameLineEdit = QLineEdit("Enter name here ")
+		self.characterNameLineEdit = QLineEdit("Enter character name here ")
+
+		# Changes the name Label
+		self.playerNameLineEdit = QLineEdit("Enter player name here ")
 
 		# Character background
 		self.characterTextEdit = QTextEdit("Enter your background here")
@@ -203,7 +209,9 @@ class CharacterCreateWidget(QWidget):
 		# re-Parenting interactionLayout
 		######################################################################################################
 
-		self.interactionLayout.addWidget(self.nameLineEdit)
+		self.interactionLayout.addWidget(self.characterNameLineEdit)
+
+		self.interactionLayout.addWidget(self.playerNameLineEdit)
 
 		self.interactionLayout.addLayout(self.comboBoxesFormLayout)
 
@@ -257,7 +265,9 @@ class CharacterCreateWidget(QWidget):
 		# Connecting the widgets with methods
 		######################################################################################################
 
-		self.nameLineEdit.textChanged.connect(self.nameChange)
+		self.characterNameLineEdit.textChanged.connect(self.characterNameChange)
+
+		self.playerNameLineEdit.textChanged.connect(self.playerNameChange)
 
 		self.classSelectorComboBox.activated[str].connect(self.classChange)
 
@@ -441,19 +451,35 @@ class CharacterCreateWidget(QWidget):
 		Output: None
 		"""
 		
-		self.procGameStart.emit(1, self.player_class)
+		self.procGameStart.emit(1, self.player_class, self.character_name, self.player_name)
 		self.procCharLabel.emit(self.imageResourceString)
 		
 
 
 
-	def nameChange(self, nameText):
+	def characterNameChange(self, nameText):
 		"""
-		Changes nameLabel
+		Changes nameLabel and character_name variable
 
 		Input:
 			nameText <str>
 
 		Output: None
 		"""
-		self.nameLabel.setText("Name: " + nameText)
+		self.nameLabel.setText("Character: " + nameText)
+		self.character_name = nameText
+
+
+
+	def playerNameChange(self, nameText):
+		"""
+		Changes player_name variable
+
+		Input:
+			nameText <str>
+
+		Output: None
+		"""
+		self.player_name = nameText
+
+

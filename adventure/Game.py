@@ -1,29 +1,37 @@
 #!/usr/bin/env python3
 
-from time import sleep
+import random
 
-import World
+from World import WorldClass
 from createPlayer import Player
 
-def change_player_class(change_player, class_name):
-	change_player.set_character_class(class_name)
+
 
 class playClass():
 
-	def __init__ (self, player_class_name):
+	def __init__ (self):
 
 		# Instantiates the player class
 		self.player = Player()
-		change_player_class(self.player, player_class_name)
 
 		# Loads the world map
-		World.initialize_world()
+		self.world = WorldClass()
 
 
 		# Places the player in the associated room(starting) and prints the text
-		self.room = World.tile_exists(self.player.location_x, self.player.location_y)
+		self.room =  self.world.tile_exists(self.player.location_x, self.player.location_y)
 
 		self.new_input = "None"
+
+		self.moved = True
+
+
+
+	def change_player_info(self, class_name, character_name, player_name):
+		self.player.set_character_class(class_name)
+		self.player.set_character_name(character_name)
+		self.player.set_player_name(player_name)	
+
 
 
 	def enterRoom(self):
@@ -35,7 +43,7 @@ class playClass():
 		######################################################################################################
 
 		
-		print(self.room.intro_text())
+		# print(self.room.intro_text())
 
 		######################################################################################################
 		# While loop for continual gameplay
@@ -43,15 +51,16 @@ class playClass():
 
 
 		# Sets the room = player x,y location
-		if (World.tile_exists(self.player.location_x, self.player.location_y)):
-			self.room = World.tile_exists(self.player.location_x, self.player.location_y)
+		if (self.world.tile_exists(self.player.location_x, self.player.location_y)):
+			self.room = self.world.tile_exists(self.player.location_x, self.player.location_y)
 
 		else:
-			self.room = World.generate_world(self.player.location_x, self.player.location_y)
+			self.world.generate_world(self.player.location_x, self.player.location_y)
+			self.room =  self.world.tile_exists(self.player.location_x, self.player.location_y)
 
 		
 
-		available_actions = self.room.available_actions(self.player)
+		available_actions = self.room.available_actions()
 
 
 
@@ -69,9 +78,9 @@ class playClass():
 		if not self.player.is_alive():
 			
 			print("GAME OVER!!!!!\n")
-			print("You made it {} tiles this attempt!".format(World.how_many_tile()))
-			World.game_over_room(self.player.location_x, self.player.location_y)
-			self.room = World.tile_exists(self.player.location_x, self.player.location_y)
+			print("You made it {} tiles this attempt!".format(self.world.how_many_tile()))
+			self.world.game_over_room(self.player.location_x, self.player.location_y)
+			self.room = self.world.tile_exists(self.player.location_x, self.player.location_y)
 
 
 			######################################################################################################
@@ -81,42 +90,88 @@ class playClass():
 		# I dont think I need the print statements here, keeping them in for testing in command line
 		print("Choose your action adventurer: \n")
 
-		available_actions = self.room.available_actions(self.player)
+		available_actions = self.room.available_actions()
 
 		# Show which actions the player can perform
 		for action in available_actions:
 			print(action)
 
 		
-		
-		if self.new_input != "None":
-			print(self.new_input)
-		
 
 		# Verifies the action is one that corresponds to a key
 		for action in available_actions:
 			if self.new_input == action.hotkey:
+				if action.moved:
+					self.moved = True
+
+				else:
+					self.moved = False					
+
 				self.player.do_action(action, **action.kwargs)
-				self.inputreceived = 0
 				break
 
-		self.inputreceived = 0
 
 	def getTileDescription(self):
 		return self.room.intro_text()
 
 	def getAvailableActions(self):
-		return self.room.available_actions(self.player)
+		return self.room.available_actions()
 
 	def getTypeOfRoom(self):
 		return self.room.room_type
 
+	def setNotMoved(self):
+		self.moved = False
+
+	def getMoved(self):
+		return self.moved
+
+	def unstickCharacter(self):
+		randx = random.randint(-10,10)
+		randy = random.randint(-10,10)
+		self.player.move(randx, randy)
+
 
 	def setUserAction(self, action):
 		self.new_input = action
-		self.inputreceived =1
+
+
+	def submitGameInfo(self):
+		self.infoTuple = (self.player.get_player_name(), self.player.get_character_name(),\
+						  self.player.get_character_class(), self.player.get_character_level(),\
+						  self.world.how_many_tile())
+
+
+		return self.infoTuple
+
+
+# 	def submitGame(self):
+# 		conn = sqlite3.connect('gameEngine.db')
+
+# 		c = conn.cursor()
+
+# 		# Create the table if it doesn't already exist
+# 		c.execute(''' CREATE TABLE IF NOT EXISTS game
+# 			(game_id integer PRIMARY KEY,
+# 			 player_name text NOT NULL,
+# 			 character_name text NOT NULL,
+# 			 class text NOT NULL
+# 			 level integer NOT NULL,
+# 			 tiles integer NOT NULL)''')
+
+# 		game_info = (self.player.get_player_name(), self.player.get_character_name(),\
+# 			self.player.get_character_class(), self.player.get_character_level(), World.how_many_tile())
+
+# 		c.execute('INSERT INTO game VALUES(?,?,?,?,?)', game_info)
 
 
 
+# # Insert a row of data
+# c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
 
+# # Save (commit) the changes
+# conn.commit()
 
+# # We can also close the connection if we are done with it.
+# # Just be sure any changes have been committed or they will be lost.
+# conn.close()

@@ -1,9 +1,25 @@
 NOTES for game
 
 Current project:
-	-Make value a dictionary so things can be worth _ copper _ silver and _ gold
-	-Introduce Armor Class and to hit commun function
-	-Introduce more variables to weapon items (die damage) and main attribute and 1 or two handed
+	-turn World into a class, it will probably fix the maptile problem
+	- Need QDialog and QMessageBox
+		-Will use to display: 
+			-Room info (openable from the menu) <- QMessageBox
+			-Character info (c press or openable from menu) <- QMessageBox is sufficient
+			-Inventory info (i press or openable from menu) <- Make dialog box for future interactability
+	-Have doors change as movement options change
+
+
+On Deck:
+	-Add stuff to GUI
+		-Splash page on the front saying Dom's Super Dope RPG
+		- Reorganize character select, take out dialog box, and move things around
+		-Message box that has room description on entering room
+		-A pop up message box on c click that has character info
+		-A pop up Dialog box which is interactable (doesn't do anything yet) for inventory
+		-Menu bar with Character, Inventory, Save(Useless), Load(Useless), and Quit to menu, Quit to exit.
+
+	
 
 
 General:
@@ -16,6 +32,8 @@ General:
 	-Upon ending map showing where they went
 
 Combat:
+	-Introduce Armor Class and to hit commun function
+	-Introduce more variables to weapon items (die damage) and main attribute and 1 or two handed
 	-More options than attack
 	-Armor
 	-Different weapon types have different attack options
@@ -34,7 +52,6 @@ Combat:
 
 
 Map:
-	-Randomize the map
 	-Add different levels
 		-Next to the end of each level have a item buyer and seller
 	-Roaming enemy

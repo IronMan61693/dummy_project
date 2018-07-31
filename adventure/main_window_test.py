@@ -42,28 +42,18 @@ class MainWindow(QMainWindow):
 		helpMenu = self.mainMenuBar.addMenu('Help')
 
 
-		uploadAction = QAction('Upload Game', self)
-		uploadAction.triggered.connect(self.centralWidget.uploadGameInfo)
 		saveAction = QAction('Save', self)
-		loadAction = QAction('Load', self)
 		exitAction = QAction('Exit', self)
 		exitAction.triggered.connect(qApp.quit)
 
 		characterAction = QAction('Character Info', self)
-		characterAction.triggered.connect(self.centralWidget.showCharacterInfo)
 		inventoryAction = QAction('Inventory', self)
 
 		roomDescAction = QAction('Description', self)
-		roomDescAction.triggered.connect(self.centralWidget.showRoomDesc)
 		actionAvailAction = QAction('Actions', self)
-		actionAvailAction.triggered.connect(self.centralWidget.showAvailActions)
-		characterStuckAction = QAction('Stuck? Click here', self)
-		characterStuckAction.triggered.connect(self.centralWidget.unstuckCharacter)
 
 
-		fileMenu.addAction(uploadAction)
 		fileMenu.addAction(saveAction)
-		fileMenu.addAction(loadAction)
 		fileMenu.addAction(exitAction)
 
 		characterMenu.addAction(characterAction)
@@ -71,7 +61,6 @@ class MainWindow(QMainWindow):
 
 		helpMenu.addAction(roomDescAction)
 		helpMenu.addAction(actionAvailAction)
-		helpMenu.addAction(characterStuckAction)
 
 		self.mainMenuBar.setVisible(False)
 		self.centralWidget.procShowMenu.connect(self.showMenuBar)

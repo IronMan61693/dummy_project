@@ -13,10 +13,11 @@ class Action():
 
 	Methods:
 	"""
-	def __init__(self, method, name, hotkey, **kwargs):
+	def __init__(self, method, name, hotkey, moved = False, **kwargs):
 		self.method = method
 		self.name = name
 		self.hotkey = hotkey
+		self.moved = moved
 		self.kwargs = kwargs
 
 	def __str__(self):
@@ -34,7 +35,7 @@ class MoveNorth(Action):
 	 See <Action> for further information
 	"""
 	def __init__(self):
-		super().__init__(method = Player.move_north, name = "Move north", hotkey = 'n')
+		super().__init__(method = Player.move_north, name = "Move north", hotkey = 'n', moved = True)
 
 
 
@@ -45,7 +46,7 @@ class MoveSouth(Action):
 	 See <Action> for further information
 	"""
 	def __init__(self):
-		super().__init__(method = Player.move_south, name = "Move south", hotkey = 's')
+		super().__init__(method = Player.move_south, name = "Move south", hotkey = 's', moved = True)
 
 
 
@@ -56,7 +57,7 @@ class MoveEast(Action):
 	 See <Action> for further information
 	"""
 	def __init__(self):
-		super().__init__(method = Player.move_east, name = "Move east", hotkey = 'e')
+		super().__init__(method = Player.move_east, name = "Move east", hotkey = 'e', moved = True)
 
 
 
@@ -67,7 +68,7 @@ class MoveWest(Action):
 	 See <Action> for further information
 	"""
 	def __init__(self):
-		super().__init__(method = Player.move_west, name = "Move west", hotkey = 'w')
+		super().__init__(method = Player.move_west, name = "Move west", hotkey = 'w', moved = True)
 
 
 
@@ -107,7 +108,7 @@ class Flee(Action):
 	 fills in specific info for Action baseclass
 	"""
 	def __init__(self, tile):
-		super().__init__(method = Player.flee, name = "Flee", hotkey = 'f', tile = tile)
+		super().__init__(method = Player.flee, name = "Flee", hotkey = 'f', tile = tile, moved = True)
 
 
 

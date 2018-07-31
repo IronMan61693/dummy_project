@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QFrame, QLabel, QPushButton, QSizePolicy, QVBoxLayout, QHBoxLayout, QMessageBox
+from PyQt5.QtWidgets import QWidget, QFrame, QLabel, QPushButton, QSizePolicy, QVBoxLayout, QHBoxLayout
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap, QImage, QKeyEvent
 
@@ -18,10 +18,14 @@ class BaseGraphicWorldTileWidget (QWidget):
 		self.mainLayout = QVBoxLayout(self)
 
 		
+		# self.setGeometry(300,300,1280,800)
+	
 		self.gameBorderFrame = QFrame()
 		
 		self.gameBorderFrame.setFrameStyle(QFrame.Box)
+		# self.gameBorderFrame.resize(900,900)
 		self.gameBorderFrame.setStyleSheet("background-color: rgb(147,145,150)")
+		# self.gameBorderFrame.setGeometry(20,20,300,600)
 		self.gameBorderFrame.setMinimumWidth(305)
 		self.gameBorderFrame.setMinimumHeight(450)
 
@@ -33,13 +37,13 @@ class BaseGraphicWorldTileWidget (QWidget):
 		self.holdCharacterInteractionLayout = QVBoxLayout()
 	
 		
-		# self.roomDescriptionLabel = QLabel()
-		# self.roomDescriptionLabel.setText("This is where the description of the current mapTile will go")
-		# self.roomDescriptionLabel.setWordWrap( True )
+		self.roomDescriptionLabel = QLabel()
+		self.roomDescriptionLabel.setText("This is where the description of the current mapTile will go")
+		self.roomDescriptionLabel.setWordWrap( True )
 
-		# self.actionsLabel = QLabel()
-		# self.actionsLabel.setText("This is where actions go")
-		# self.actionsLabel.setWordWrap( True )
+		self.actionsLabel = QLabel()
+		self.actionsLabel.setText("This is where actions go")
+		self.actionsLabel.setWordWrap( True )
 
 		self.playerLabel = QLabel()
 		self.playerLabel.setText("Player")
@@ -69,21 +73,21 @@ class BaseGraphicWorldTileWidget (QWidget):
 		self.rightDoorLabel.setAlignment(Qt.AlignRight)
 		self.leftDoorLabel.setAlignment(Qt.AlignLeft)
 		self.interactableLabel.setAlignment(Qt.AlignCenter)
-		self.playerLabel.setAlignment(Qt.AlignCenter)
-		# self.roomDescriptionLabel.setAlignment(Qt.AlignCenter)
-		# self.actionsLabel.setAlignment(Qt.AlignCenter)
+		self.roomDescriptionLabel.setAlignment(Qt.AlignCenter)
+		self.actionsLabel.setAlignment(Qt.AlignCenter)
 
 
 
 
 		self.mainInnerLayout.addStretch(0)
 		self.mainInnerLayout.addLayout(self.topInnerLayout)
-		self.mainInnerLayout.addStretch(1)
+		self.mainInnerLayout.addStretch(9)
 		self.mainInnerLayout.addLayout(self.middleInnerLayout)
 		self.mainInnerLayout.addStretch(1)
-		# self.mainInnerLayout.addWidget(self.roomDescriptionLabel)
-		# self.mainInnerLayout.addWidget(self.actionsLabel)
-		# self.mainInnerLayout.addStretch(0)
+		self.mainInnerLayout.addWidget(self.roomDescriptionLabel)
+		self.mainInnerLayout.addStretch(0)
+		self.mainInnerLayout.addWidget(self.actionsLabel)
+		self.mainInnerLayout.addStretch(0)
 		self.mainInnerLayout.addLayout(self.bottomInnerLayout)
 
 
@@ -104,7 +108,7 @@ class BaseGraphicWorldTileWidget (QWidget):
 
 
 		# self.mainInnerLayout.addWidget(self.gameBorderFrame)
-		self.mainLayout.addStretch(1)
+		self.mainLayout.addStretch(8)
 		self.mainLayout.addWidget(self.gameBorderFrame)
 		self.mainLayout.addStretch(1)
 
@@ -125,78 +129,18 @@ class BaseGraphicWorldTileWidget (QWidget):
 
 
 
-	def set_room_description(self, roomDescription, moved, actions):
-		# Change door labels here
+	def set_room_description(self, roomDescription):
 
-		# self.roomDescriptionLabel.setText(roomDescription)
-
-		if moved:
-			self.roomDescriptionMessageBox = QMessageBox()
-			self.roomDescriptionMessageBox.setIcon(QMessageBox.Information)
-			self.roomDescriptionMessageBox.setText(roomDescription)
-			self.roomDescriptionMessageBox.setWindowTitle("Your current room")
-			self.roomDescriptionMessageBox.setStandardButtons(QMessageBox.Ok)
-
-			self.roomDescriptionMessageBox.exec_()
-
-		action_hotkeys = []
-		for action in actions:
-			action_hotkeys.append(action.hotkey)
-
-
-		if "n" in action_hotkeys:
-			self.topDoorLabel.show()
-		else:
-			self.topDoorLabel.hide()
-
-		if "e" in action_hotkeys:
-			self.rightDoorLabel.show()
-		else:
-			self.rightDoorLabel.hide()
-
-		if "s" in action_hotkeys:
-			self.bottomDoorLabel.show()
-		else:
-			self.bottomDoorLabel.hide()
-
-		if "w" in action_hotkeys:
-			self.leftDoorLabel.show()
-		else:
-			self.leftDoorLabel.hide()
-
-
-
-
-# def showdialog():
-#    msg = QMessageBox()
-#    msg.setIcon(QMessageBox.Information)
-
-#    msg.setText("This is a message box")
-#    msg.setInformativeText("This is additional information")
-#    msg.setWindowTitle("MessageBox demo")
-#    msg.setDetailedText("The details are as follows:")
-#    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-#    msg.buttonClicked.connect(msgbtn)
-	
-#    retval = msg.exec_()
-#    print "value of pressed message box button:", retval
+		self.roomDescriptionLabel.setText(roomDescription)
 
 
 
 
 	def set_actions(self, actions):
-		self.actionString = "Actions:\n"
+		actionString = "Actions:\n"
 		for action in actions:
-			self.actionString = self.actionString + str(action) + "\n"
-
-		self.actionsMessageBox = QMessageBox()
-		self.actionsMessageBox.setIcon(QMessageBox.Warning)
-		self.actionsMessageBox.setText(self.actionString)
-		self.actionsMessageBox.setWindowTitle("Available Actions")
-		self.actionsMessageBox.setStandardButtons(QMessageBox.Ok)
-
-		self.actionsMessageBox.exec_()
-		# self.actionsLabel.setText(self.actionString)
+			actionString = actionString + str(action) + "       "
+		self.actionsLabel.setText(actionString)
 
 
 	def empty_room(self):
