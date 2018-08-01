@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QFrame, QLabel, QPushButton, QSizePolicy, QVBoxLayout, QHBoxLayout, QMessageBox
+from PyQt5.QtWidgets import QWidget, QFrame, QLabel, QPushButton, QSizePolicy, QVBoxLayout, QHBoxLayout, QMessageBox, QPlainTextEdit
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap, QImage, QKeyEvent
 
@@ -22,10 +22,11 @@ class BaseGraphicWorldTileWidget (QWidget):
 		
 		self.gameBorderFrame.setFrameStyle(QFrame.Box)
 		self.gameBorderFrame.setStyleSheet("background-color: rgb(147,145,150)")
-		self.gameBorderFrame.setMinimumWidth(305)
-		self.gameBorderFrame.setMinimumHeight(450)
+		self.gameBorderFrame.setMinimumWidth(560)
+		self.gameBorderFrame.setMinimumHeight(580)
 
-		self.mainInnerLayout = QVBoxLayout(self.gameBorderFrame)
+		self.addUsefulLayout = QHBoxLayout(self.gameBorderFrame)
+		self.mainInnerLayout = QVBoxLayout()
 		self.topInnerLayout = QVBoxLayout()
 		self.middleInnerLayout = QHBoxLayout()
 		self.bottomInnerLayout = QVBoxLayout()
@@ -53,6 +54,19 @@ class BaseGraphicWorldTileWidget (QWidget):
 		self.rightDoorLabel = QLabel()
 		self.bottomDoorLabel = QLabel()
 
+		self.scrollingInfoProvidingPlainTextEdit = QPlainTextEdit()
+		self.scrollingInfoProvidingPlainTextEdit.setFixedWidth(230)
+		self.scrollingInfoProvidingPlainTextEdit.setReadOnly(True)
+		self.introTextString = ("Greetings adventurer\n"
+								"Here you will find useful information regarding the game you are currently playing.\n"
+								"The actions you can take can be found under the help button on the menu.\n"
+								"The Help button will also give you some further information regarding what exactly is going on.\n"
+								"Right now I would recommend clicking i to look at your inventory.\n"
+								"You can also click c to look at your character.\n"
+								"Are you can click n,e,s,w in order to go in that direction.\n"
+								"North East South and West respectively.\n")
+		self.scrollingInfoProvidingPlainTextEdit.appendPlainText(self.introTextString)
+
 		self.doorImage = QImage("resources/Door.png")
 		self.doorImage = self.doorImage.scaled(35,35)
 
@@ -76,6 +90,9 @@ class BaseGraphicWorldTileWidget (QWidget):
 
 
 
+
+
+
 		self.mainInnerLayout.addStretch(0)
 		self.mainInnerLayout.addLayout(self.topInnerLayout)
 		self.mainInnerLayout.addStretch(1)
@@ -88,9 +105,10 @@ class BaseGraphicWorldTileWidget (QWidget):
 
 
 		self.topInnerLayout.addWidget(self.topDoorLabel)
-		self.topInnerLayout.addWidget(self.interactableLabel)
+		
 
 		self.middleInnerLayout.addWidget(self.leftDoorLabel)
+		self.middleInnerLayout.addWidget(self.interactableLabel)
 		self.middleInnerLayout.addLayout(self.holdCharacterInteractionLayout)
 		self.middleInnerLayout.addWidget(self.rightDoorLabel)
 
@@ -104,6 +122,9 @@ class BaseGraphicWorldTileWidget (QWidget):
 
 
 		# self.mainInnerLayout.addWidget(self.gameBorderFrame)
+		self.addUsefulLayout.addLayout(self.mainInnerLayout)
+		self.addUsefulLayout.addWidget(self.scrollingInfoProvidingPlainTextEdit)
+
 		self.mainLayout.addStretch(1)
 		self.mainLayout.addWidget(self.gameBorderFrame)
 		self.mainLayout.addStretch(1)
@@ -138,6 +159,8 @@ class BaseGraphicWorldTileWidget (QWidget):
 			self.roomDescriptionMessageBox.setStandardButtons(QMessageBox.Ok)
 
 			self.roomDescriptionMessageBox.exec_()
+
+			self.scrollingInfoProvidingPlainTextEdit.appendPlainText(roomDescription)
 
 		action_hotkeys = []
 		for action in actions:

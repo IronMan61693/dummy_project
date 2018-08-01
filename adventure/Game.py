@@ -144,6 +144,18 @@ class playClass():
 
 		return self.infoTuple
 
+	def currentInventoryDictionary(self):
+		return self.player.inventory.get_inventory_dict()
+
+	def currentEquippedAll(self):
+		return self.player.inventory.get_all_equipped()
+
+	def equipMainHand(self, weapon):
+		self.player.inventory.equip_main_hand(weapon)
+
+	def mainHandOptions(self):
+		return self.player.inventory.get_main_hand_options()
+
 
 # 	def submitGame(self):
 # 		conn = sqlite3.connect('gameEngine.db')

@@ -143,7 +143,8 @@ class Weapon(Item):
 		__init__(self, name, description, value, damage) calls Item init, adds damage variable
 		__str__(self): returns a string with the information of the weapon
 	"""
-	def __init__(self, name, description, damage, value_copper = 0 , value_silver = 0, value_gold = 0):
+	def __init__(self, name, description, damage, value_copper = 0 , value_silver = 0, value_gold = 0, main_hand = False, \
+				 off_hand = False):
 		"""
 		Input: 
 			name <str>
@@ -152,6 +153,8 @@ class Weapon(Item):
 			damage <int>
 		"""
 		self.damage = damage
+		self.main_hand = main_hand
+		self.off_hand = off_hand
 		super().__init__(name, description, value_copper, value_silver, value_gold)
 
 	def __str__(self):
@@ -191,7 +194,8 @@ class Fist(Weapon):
 		super().__init__(name = "Fist",
 						 description = "Your bruised and battered fist.",
 						 value_copper = 1,
-						 damage = 3)
+						 damage = 3,
+						 main_hand = True)
 
 
 
@@ -219,7 +223,8 @@ class Rock(Weapon):
 		super().__init__(name = "Rock",
 						 description = "A fist-sized rock, suitable for bludgeoning heads",
 						 value_copper = 5,
-						 damage = 5)
+						 damage = 5,
+						 main_hand = True)
 
 
 
@@ -247,4 +252,6 @@ class Dagger(Weapon):
 		super().__init__(name = "Dagger",
 						 description = "A rust covered dagger, slightly more dangerous than a rock",
 						 value_silver = 10,
-						 damage = 10)
+						 damage = 10,
+						 main_hand = True,
+						 off_hand = True)

@@ -111,6 +111,11 @@ class Flee(Action):
 		super().__init__(method = Player.flee, name = "Flee", hotkey = 'f', tile = tile, moved = True)
 
 
+class Equip(Action):
+	def __init__(self):
+		super().__init__(method = Player.equip, name = "Equip", hotkey = 'o')
+
+
 
 class Quit(Action):
 	"""

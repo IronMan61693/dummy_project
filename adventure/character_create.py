@@ -107,10 +107,12 @@ class CharacterCreateWidget(QWidget):
 		self.dateTimeLabel = QLabel(self.dateTime.toString())
 
 		# Changes the name Label
-		self.characterNameLineEdit = QLineEdit("Enter character name here ")
+		self.characterNameLineEdit = QLineEdit()
+		self.characterNameLineEdit.setPlaceholderText("Enter character name here ")
 
 		# Changes the name Label
-		self.playerNameLineEdit = QLineEdit("Enter player name here ")
+		self.playerNameLineEdit = QLineEdit()
+		self.playerNameLineEdit.setPlaceholderText("Enter player name here ")
 
 		# Character background
 		self.characterTextEdit = QTextEdit("Enter your background here")

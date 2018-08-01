@@ -26,8 +26,8 @@ class MainWindow(QMainWindow):
 		self.centralWidget.setPalette(newPalette)
 
 		
-		self.centralWidget.setFixedWidth(355)
-		self.centralWidget.setFixedHeight(580)
+		self.centralWidget.setFixedWidth(580)
+		self.centralWidget.setFixedHeight(680)
 		# self.setGeometry(self.left, self.top, self.width, self.height)
 
 		self.setCentralWidget(self.centralWidget)
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
 		helpMenu = self.mainMenuBar.addMenu('Help')
 
 
-		uploadAction = QAction('Upload Game', self)
+		uploadAction = QAction('Upload Game To Website', self)
 		uploadAction.triggered.connect(self.centralWidget.uploadGameInfo)
 		saveAction = QAction('Save', self)
 		loadAction = QAction('Load', self)
@@ -52,6 +52,9 @@ class MainWindow(QMainWindow):
 		characterAction = QAction('Character Info', self)
 		characterAction.triggered.connect(self.centralWidget.showCharacterInfo)
 		inventoryAction = QAction('Inventory', self)
+		inventoryAction.triggered.connect(self.centralWidget.showInventoryInfo)
+		equipmentAction = QAction('Equipment', self)
+		equipmentAction.triggered.connect(self.centralWidget.changeEquipmentGeneral)
 
 		roomDescAction = QAction('Description', self)
 		roomDescAction.triggered.connect(self.centralWidget.showRoomDesc)
@@ -59,6 +62,9 @@ class MainWindow(QMainWindow):
 		actionAvailAction.triggered.connect(self.centralWidget.showAvailActions)
 		characterStuckAction = QAction('Stuck? Click here', self)
 		characterStuckAction.triggered.connect(self.centralWidget.unstuckCharacter)
+		helpMeAction = QAction('Helpful Info', self)
+		helpMeAction.triggered.connect(self.centralWidget.showHelpfulInfo)
+
 
 
 		fileMenu.addAction(uploadAction)
@@ -68,10 +74,12 @@ class MainWindow(QMainWindow):
 
 		characterMenu.addAction(characterAction)
 		characterMenu.addAction(inventoryAction)
+		characterMenu.addAction(equipmentAction)
 
 		helpMenu.addAction(roomDescAction)
 		helpMenu.addAction(actionAvailAction)
 		helpMenu.addAction(characterStuckAction)
+		helpMenu.addAction(helpMeAction)
 
 		self.mainMenuBar.setVisible(False)
 		self.centralWidget.procShowMenu.connect(self.showMenuBar)

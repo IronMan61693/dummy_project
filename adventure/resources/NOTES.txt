@@ -1,16 +1,20 @@
 NOTES for game
 
 Current project:
-	-turn World into a class, it will probably fix the maptile problem
+	- Introduce a general help button
+
+	- QPlainTextEdit (Status screen on the side to provide information to the player, I can set to read only)
+
 	- Need QDialog and QMessageBox
 		-Will use to display: 
-			-Room info (openable from the menu) <- QMessageBox
-			-Character info (c press or openable from menu) <- QMessageBox is sufficient
-			-Inventory info (i press or openable from menu) <- Make dialog box for future interactability
-	-Have doors change as movement options change
+			-Character info (c press or openable from menu) <- Use QDialog box and lay out better
+			-Inventory info (i press or openable from menu) <- Use QDialog box and lay out better
+
+	- Splash page with a help intro
 
 
 On Deck:
+	-GameOver room cause pop up to upload game info
 	-Add stuff to GUI
 		-Splash page on the front saying Dom's Super Dope RPG
 		- Reorganize character select, take out dialog box, and move things around
@@ -30,6 +34,13 @@ General:
 	-Make gold useful
 	-A few NPCs
 	-Upon ending map showing where they went
+
+GUI:
+	- Update character create page
+		- Get rid of name at the top
+		- Put character name and player name in form Layout with Name and Player name next to it
+		- Move finish to the bottom and put the picture/stats under class?
+		- Get rid of Enter background, it is useless
 
 Combat:
 	-Introduce Armor Class and to hit commun function

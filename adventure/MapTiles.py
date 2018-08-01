@@ -82,6 +82,7 @@ class MapTile:
 	def set_available_actions(self):
 		self.all_moves = self.adjacent_movements
 		self.all_moves.append(Actions.ViewInventory())
+		self.all_moves.append(Actions.Equip())
 		self.all_moves.append(Actions.ViewCharacter())
 		self.all_moves.append(Actions.Quit())
 
@@ -220,7 +221,7 @@ class LootRoom(MapTile):
 			pass
 
 		else:
-			player.inventory.append(self.item)
+			player.inventory.add_to_inventory(self.item, 1)
 			self.item.set_looted()
 			self.room_type = 2
 
@@ -269,7 +270,7 @@ class LootCoinRoom(MapTile):
 
 		else:
 			self.room_type = 2
-			player.add_to_pouch(self.coin.name, self.coin.coin_amount)
+			player.inventory.add_to_pouch(self.coin.name, self.coin.coin_amount)
 			self.coin.set_looted()
 
 	def modify_player(self, player):
@@ -321,7 +322,8 @@ class EnemyRoom(MapTile):
 		if self.enemy.is_alive():
 			the_player.hp = the_player.hp - self.enemy.damage
 			print("{} enemy does {} damage. You now have {} HP remaining\n".format(self.enemy.name, self.enemy.damage, the_player.hp))
-
+			enemy_string = "{} enemy does {} damage. You now have {} HP remaining\n".format(self.enemy.name, self.enemy.damage, the_player.hp)
+			return enemy_string
 		else:
 			self.room_type = 4
 			if (self.update_available_actions):
@@ -339,6 +341,7 @@ class EnemyRoom(MapTile):
 		if self.enemy.is_alive():
 			self.all_moves = [Actions.Flee(tile=self), Actions.Attack(enemy = self.enemy)]
 			self.all_moves.append(Actions.ViewInventory())
+			self.all_moves.append(Actions.Equip())
 			self.all_moves.append(Actions.ViewCharacter())
 			self.all_moves.append(Actions.Quit())
 
@@ -347,6 +350,7 @@ class EnemyRoom(MapTile):
 		else:
 			self.all_moves = self.adjacent_movements
 			self.all_moves.append(Actions.ViewInventory())
+			self.all_moves.append(Actions.Equip())
 			self.all_moves.append(Actions.ViewCharacter())
 			self.all_moves.append(Actions.Quit())
 

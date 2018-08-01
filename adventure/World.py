@@ -25,12 +25,12 @@ class WorldClass(object):
 		self.fillTiles = []
 
 		# Originally populating the fillTiles
-		self.fillTiles.extend(["Find5GoldRoom"]*4)
-		self.fillTiles.extend(["EmptyCavePath"]*12)
-		self.fillTiles.extend(["OgreRoom"]*2)
-		self.fillTiles.extend(["GiantSpiderRoom"]*4)
-		self.fillTiles.extend(["FindRockRoom"]*3)
-		self.fillTiles.extend(["FindDaggerRoom"]*2)
+		# self.fillTiles.extend(["Find5GoldRoom"]*4)
+		# self.fillTiles.extend(["EmptyCavePath"]*12)
+		# self.fillTiles.extend(["OgreRoom"]*2)
+		# self.fillTiles.extend(["GiantSpiderRoom"]*4)
+		self.fillTiles.extend(["FindRockRoom"]*4)
+		# self.fillTiles.extend(["FindDaggerRoom"]*2)
 
 
 

@@ -1,6 +1,7 @@
 import random
 
 import  Items
+from Inventory import Inventory
 
 from Common_Functions import dice_roller
 
@@ -37,11 +38,15 @@ class Player():
 		self.character_name = "Character"
 		self.player_name = "Zorg"
 		self.character_level = 1
-		self.my_coin_pouch =  Items.CoinPouch()
-		self.my_coin_pouch.add_to_me("Gold", 15)
-		self.inventory = [self.my_coin_pouch,  Items.Fist()]
+		self.inventory = Inventory()
+		self.inventory.add_to_pouch("Gold", 15)
+		self.inventory.add_to_inventory(Items.Fist(), 1)
+		self.inventory.equip_main_hand("Fist")
+		# self.my_coin_pouch =  Items.CoinPouch()
+		# self.my_coin_pouch.add_to_me("Gold", 15)
+		# self.inventory = [self.my_coin_pouch,  Items.Fist()]
 		self.hp = 100
-		self.location_x, self.location_y =   (0,0)
+		self.location_x, self.location_y = (0,0)
 		self.victory = False
 		self.character_class = "No Class"
 		self.strength = 10
@@ -55,16 +60,16 @@ class Player():
 
 
 
-	def add_to_pouch(self, coin_name, coin_amount):
-		"""
-		For the instance of CoinPouch called my_coin_pouch calls
-		 method add_to_me with the variables coi_name and coin_value
+	# def add_to_pouch(self, coin_name, coin_amount):
+	# 	"""
+	# 	For the instance of CoinPouch called my_coin_pouch calls
+	# 	 method add_to_me with the variables coi_name and coin_value
 
-		Input:
-			coin_name <str>
-			coin_value <int>
-		"""
-		self.my_coin_pouch.add_to_me(coin_name, coin_amount)
+	# 	Input:
+	# 		coin_name <str>
+	# 		coin_value <int>
+	# 	"""
+	# 	self.my_coin_pouch.add_to_me(coin_name, coin_amount)
 		
 
 
@@ -85,8 +90,7 @@ class Player():
 		Output:
 			print statement
 		"""
-		for item in self.inventory:
-			print(item, '\n')
+		self.inventory.print_inventory()
 
 
 	def view_character(self):
@@ -292,24 +296,29 @@ class Player():
 			modifies enemy instance
 			print statement
 		"""
-		best_weapon = None
-		max_dmg = 0
+		best_weapon = self.inventory.get_main_hand_equipped()
+		# max_dmg = 0
 
-		# Finds the most damage weapon in inventory
-		for weap in self.inventory:
-			if isinstance(weap,  Items.Weapon):
-				if weap.damage > max_dmg:
-					max_dmg = weap.damage
-					best_weapon = weap
+		# # Finds the most damage weapon in inventory
+		# for weap in self.inventory:
+		# 	if isinstance(weap,  Items.Weapon):
+		# 		if weap.damage > max_dmg:
+		# 			max_dmg = weap.damage
+		# 			best_weapon = weap
 
+		attack_string = "You used your {} against the {}!".format(best_weapon.name, enemy.name)
 		print("You used your {} against the {}!".format(best_weapon.name, enemy.name))
 		enemy.hp -= best_weapon.damage
 
 		if not enemy.is_alive():
+			attack_string = attack_string + "You killed the {}!".format(enemy.name)
 			print("You killed the {}!".format(enemy.name))
 
 		else:
+			attack_string = attack_string + "The {}'s HP is now {}.".format(enemy.name, enemy.hp)
 			print("The {}'s HP is now {}.".format(enemy.name, enemy.hp))
+
+		return attack_string
 
 
 
@@ -321,8 +330,8 @@ class Player():
 			tile <MapTile>
 		"""
 		available_moves = tile.adjacent_moves()
-		r = random.randint(0,len(available_moves) -1)
-		self.do_action(available_moves[r])
+		random_direction = random.randint(0,len(available_moves) -1)
+		self.do_action(available_moves[random_direction])
 
 
 
@@ -333,6 +342,24 @@ class Player():
 		print("You have decided to leave the adventure early. See you next time!")
 		self.hp = 0
 
+
+
+	def equip(self):
+		equipment_choice = print("Select which piece of equipment you would like to change.\n"
+								 "1 For main hand, 2 For off hand, 3 for armor, 4 for ring and 5 for amulet.")
+		if equipment_choice == 1:
+			self.equip_main_hand_action()
+
+
+
+	def equip_main_hand_action(self):
+		print("Choose the item you would like to equip from the following items in your inventory.")
+		for weapon in self.inventory.get_main_hand_options():
+			print(weapon)
+		weapon_choice = input("Type the name of the weapon you would like to equip.")
+		for weapon in self.inventory.get_main_hand_options():
+			if weapon_choice == weapon.name:
+				self.inventory.equip_main_hand(weapon)
 
 
 
@@ -349,3 +376,6 @@ class Player():
 		# Verifies valid input
 		if action_method:
 			action_method(**kwargs)
+
+
+

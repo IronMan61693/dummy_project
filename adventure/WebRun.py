@@ -26,7 +26,7 @@ def load_user(user_id):
 
 
 
-webApp.run(debug=True)
+webApp.run()
 
 
 # @login_manager.user_loader
