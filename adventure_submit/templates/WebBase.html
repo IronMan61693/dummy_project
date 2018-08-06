@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = "stylesheet" type = "text/css" href = "{{url_for('static',filename='styles/WebBase.css') }}" >
+		{% if title %}
+		<title> {{ title }} </title>
+		{% else %}
+		<title>Forgot a title</title>
+		{% endif %}
+	</head>
+
+	<body>
+		<ul>
+			<li><a href="{{ url_for('route_page.home_page') }}" title="Wacky page">Home</a></li>
+			<li><a href="{{ url_for('route_page.score_page') }}" title= "A useless scorepage">Top Scores</a></li>
+			{% if current_user.is_anonymous %}
+			<li><a href="{{ url_for('route_page.login_page') }}">Login</a></li>
+			{% else %}
+			<li><a href="{{ url_for('route_page.characters_page') }}">Characters</a></li>
+			<li><a href="{{ url_for('route_page.logout') }}">Logout</a></li>
+			{% endif %}
+	
+
+
+		
+
+			
+		</ul>
+
+		<div id="mySidenav" class="sidenav">
+			<a href = "javascript:void(0)" class = "closebtn" onclick = "closeNav()">&times;</a>
+			<a href="{{ url_for('route_page.home_page') }}">Home</a>
+			<a href="{{ url_for('route_page.score_page') }}">Top Scores</a>
+			{% if current_user.is_anonymous %}
+			<li><a href="{{ url_for('route_page.login_page') }}">Login</a></li>
+			{% else %}
+			<li><a href="{{ url_for('route_page.characters_page') }}">Characters</a></li>
+			<li><a href="{{ url_for('route_page.logout') }}">Logout</a></li>
+			{% endif %}
+	
+	
+
+		</div>
+
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+		<script>
+			function openNav() {
+				document.getElementById("mySidenav").style.width = "100%";
+				document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+			}
+
+			function closeNav() {
+				document.getElementById("mySidenav").style.width = "0";
+				document.body.style.backgroundColor = "white";
+			}
+		</script> 
+
+		<hr>
+
+
+
+			{% block body %}
+
+				<h1>Wacky Website !!</h1>
+
+				<p>This is the first paragraph allowing us to type what we want.</p>
+
+				<br>
+
+				<h2>This header isn't as important</h2>
+
+				<p>This paragraph is following under the second header and is therefore not as interesting.</p>
+
+			{% endblock %}
+
+		<hr>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<ul>
+				{% for message in messages %}
+				<li> {{ message }} </li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+
+
+	</body>
+
+</html>
+

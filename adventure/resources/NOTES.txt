@@ -1,10 +1,7 @@
 NOTES for game
 
 Current project:
-	- Introduce a general help button
-
-	- QPlainTextEdit (Status screen on the side to provide information to the player, I can set to read only)
-
+	- Game over upload messagebox
 	- Need QDialog and QMessageBox
 		-Will use to display: 
 			-Character info (c press or openable from menu) <- Use QDialog box and lay out better
