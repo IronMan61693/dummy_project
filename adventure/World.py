@@ -44,11 +44,11 @@ class WorldClass(object):
 
 		# Originally populating the fillTiles
 		self.fillTiles.extend(["Find5GoldRoom"]*4)
-		self.fillTiles.extend(["EmptyCavePath"]*4)
-		self.fillTiles.extend(["OgreRoom"]*2)
-		self.fillTiles.extend(["GiantSpiderRoom"]*4)
-		self.fillTiles.extend(["FindShortSwordRoom"]*4)
-		self.fillTiles.extend(["FindDaggerRoom"]*2)
+		# self.fillTiles.extend(["EmptyCavePath"]*4)
+		# self.fillTiles.extend(["OgreRoom"]*2)
+		# self.fillTiles.extend(["GiantSpiderRoom"]*4)
+		# self.fillTiles.extend(["FindShortSwordRoom"]*4)
+		# self.fillTiles.extend(["FindDaggerRoom"]*2)
 
 
 

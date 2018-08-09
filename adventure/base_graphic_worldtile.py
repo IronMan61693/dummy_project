@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QWidget, QFrame, QLabel, QPushButton, QSizePolicy, Q
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap, QImage, QKeyEvent
 
-from character_create import CharacterCreateWidget
 
 
 

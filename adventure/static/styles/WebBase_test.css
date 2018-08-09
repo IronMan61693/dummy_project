@@ -1,29 +1,31 @@
 body {
     padding: 30px;
     margin: 10px;
-    border: 5px solid #f1eff9;
+    border: 5px solid #6672ff;
     width: 80%;
     height: 75%;
-
-    background-image: url("../dust_scratches/dust_scratches.png");
+    background-color: #242fb2;
+    /*background-image: url("../what-the-hex-dark/what-the-hex-dark.png");*/
 }
 
 h1 {
+    border: 5px inset #242fb2;
     padding: 20px;
     font-family: "Courier New", monospace;
-    background-color: #f1eff9;
+    background-color: #6672ff;
+    color: #d3d3d3;
     width: 95%;
-    height: 75px;
+    /*height: 75px;*/
     text-align: center;
 
 }
 
 p {
-    border: 5px inset #635b99;
-    color: #3d3768;
+    border: 5px inset #242fb2;
+    color: #d3d3d3;
     width:93%;
-    height:100px;
-    background-color: #f1eff9;
+    /*height:100px;*/
+    background-color: #6672ff;
     padding: 20px;
     font-family: "Courier New", monospace;
 
@@ -34,28 +36,51 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #4c5aff;
+    width: 100%;
 }
 
 li {
-    float: left
+    float: left;
+
+    &.right{
+        float: right;
+    }
 }
 
 li a{
     display: block;
-    color: white;
+    color: #ffd94c;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
 
 li a:hover:not(.active){
-    background-color: #111;
+    background-color: #242fb2;
 }
 
 
 li a.active{
-    background-color: #635b99;
+    background-color: #242fb2;
+}
+
+table, th, td {
+    border: 3px inset #003366;
+    border-collapse: collapse;
+    background-color: #6672ff;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    height: 50px;
+}
+
+th, td {
+    padding: 10px;
 }
 
 /* The side navigation menu */

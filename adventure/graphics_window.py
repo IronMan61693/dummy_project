@@ -30,6 +30,7 @@ def main():
 	# user input
 	application.exec()
 	webProcess.terminate()
+	webProcess.waitForFinished()
 	exit()
 
 

@@ -73,6 +73,32 @@ class Coin(Item):
 
 
 
+class Gold(Coin):
+	"""
+	Extends the Coin Class
+
+	Variables:
+		Inherited from Coin:
+			name <str>
+			description <str>
+			value_copper <int>
+			value_silver <int>
+			value_gold <int>
+			looted <bool>
+	"""
+	def __init__(self, amount):
+		"""
+		Input: 
+			amount <int>
+		"""
+
+		self.amount = amount
+		super().__init__(coin_name = "Gold",
+						 coin_amount = self.amount,
+						 value_gold = self.amount)
+
+
+
 class CoinPouch(Item):
 	"""
 	An Item to keep track of Coin
