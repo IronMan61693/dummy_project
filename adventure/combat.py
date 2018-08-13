@@ -20,6 +20,7 @@ class Combat():
 		attack() Updates attacker, changes hit_string, uses attack_damage to determine damage done 
 		 and lowers defender hp appropriately
 		attack_damage() Uses dice_roller common function to determine damage
+		attack_to_hit() Uses attacker and defender information to determine if that attack hit
 		combat_description() Formats the information of the attacks in a string
 	"""
 	def __init__(self, player, enemy):
@@ -70,15 +71,15 @@ class Combat():
 		self.defender = defender
 		self.hit_string = "missed"
 
-		if hit:
+		if self.attack_to_hit(self.attacker, self.defender):
 			self.hit_string = "hit"
 			self.damage = self.attack_damage(attacker)
 			defender.hp -= self.damage
-			return self.damage
-			if self.attacker == self.enemy:
-				self.enemy_combat_string = combat_description()
+		
 
-		return 0
+		else:
+			self.damage = 0
+
 
 
 	def attack_damage(self, attacker):
@@ -92,6 +93,20 @@ class Combat():
 			diceRoll <int>
 		"""
 		return dice_roller(attacker.weapon.quantity_of_die, attacker.weapon.damage_die_type, attacker.dmg_mod)
+
+	def attack_to_hit(self, attacker, defender):
+		"""
+		Uses dice_roller common function to determine if the attacker hit the defender (defender AC)
+		 true if hit, false on miss
+
+		Input:
+			attacker <Player/Enemy>
+			defender <Player/Enemy>
+
+		Output:
+			diceRoll <bool>
+		"""
+		return (dice_roller(1, 20, attacker.hit_check()) > defender.ArmorClass)
 
 	def combat_description(self):
 		"""

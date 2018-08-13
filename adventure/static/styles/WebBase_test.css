@@ -43,9 +43,6 @@ ul {
 li {
     float: left;
 
-    &.right{
-        float: right;
-    }
 }
 
 li a{

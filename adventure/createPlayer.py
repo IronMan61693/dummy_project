@@ -65,6 +65,9 @@ class Player():
 		self.inventory.add_to_inventory(Items.Fist(), 1)
 		self.inventory.equip_main_hand("Fist")
 
+		self.inventory.add_to_inventory(Items.ShreddedRags(), 1)
+		self.inventory.equip_armor("Shredded Rags")
+
 		
 		self.character_class = "No Class"
 		self.strength = 10
@@ -77,6 +80,18 @@ class Player():
 
 		self.weapon = self.inventory.get_main_hand_equipped()
 		self.dmg_mod = 2
+
+		self.armor = self.inventory.get_armor_equipped()
+		self.ArmorClass = self.armor.AC
+
+	def hit_check(self):
+		"""
+		Returns the difference between the bonus of the weapon to hit and the penalty from the armor
+
+		Output:
+			<int>
+		"""
+		return (self.weapon.to_hit - self.armor.to_hit_mod)
 
 
 
@@ -140,12 +155,18 @@ class Player():
 			self.constitution = 12
 			self.intellect = 6
 
+			self.inventory.add_to_inventory(Items.BattleAxe(), 1)
+			self.inventory.equip_main_hand("Battle Axe")
+
 		elif (class_name == "Knight"):
 			self.character_class = class_name
 			self.strength = 12
 			self.dexterity = 8
 			self.constitution = 12
 			self.intellect = 8
+
+			self.inventory.add_to_inventory(Items.LongSword(), 1)
+			self.inventory.equip_main_hand("Long Sword")
 
 		elif (class_name == "Nerd"):
 			self.character_class = class_name
@@ -161,6 +182,9 @@ class Player():
 			self.constitution = 8
 			self.intellect = 12
 
+			self.inventory.add_to_inventory(Items.Dagger(), 1)
+			self.inventory.equip_main_hand("Dagger")
+	
 		else:
 			self.character_class = "No Class"
 			self.strength = 10

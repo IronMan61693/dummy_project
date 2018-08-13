@@ -15,6 +15,7 @@ class MainWindow(QMainWindow):
 		fileMenu <menu>
 		characterMenu <menu>
 		helpMenu <menu>
+		openWebAction <QAction>
 		uploadAction <QAction>
 		exitAction <QAction>
 		characterAction <QAction>
@@ -74,6 +75,8 @@ class MainWindow(QMainWindow):
 		# Create and set actions
 		######################################################################################################
 
+		openWebAction = QAction('Open Website', self)
+		openWebAction.triggered.connect(self.centralWidget.launchWeb)
 		uploadAction = QAction('Upload Game To Website', self)
 		uploadAction.triggered.connect(self.centralWidget.uploadGameInfo)
 		exitAction = QAction('Exit', self)
@@ -99,6 +102,7 @@ class MainWindow(QMainWindow):
 		# Pair actions with menubar
 		######################################################################################################
 
+		fileMenu.addAction(openWebAction)
 		fileMenu.addAction(uploadAction)
 		fileMenu.addAction(exitAction)
 
@@ -120,10 +124,6 @@ class MainWindow(QMainWindow):
 
 	def showMenuBar(self):
 		self.mainMenuBar.setVisible(True)
-
-
-
-
 
 
 

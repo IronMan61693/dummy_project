@@ -43,18 +43,45 @@ class WorldClass(object):
 		self.fillTiles = []
 
 		# Originally populating the fillTiles
-		self.fillTiles.extend(["Find5GoldRoom"]*4)
-		# self.fillTiles.extend(["EmptyCavePath"]*4)
-		# self.fillTiles.extend(["OgreRoom"]*2)
-		# self.fillTiles.extend(["GiantSpiderRoom"]*4)
-		# self.fillTiles.extend(["FindShortSwordRoom"]*4)
-		# self.fillTiles.extend(["FindDaggerRoom"]*2)
+		self.fillTiles.extend(["Find5GoldRoom"]*8)
+		self.fillTiles.extend(["EmptyCavePath"]*8)
+
+		self.fillTiles.extend(["BanditRoom"]*8)
+		self.fillTiles.extend(["GiantSpiderRoom"]*6)
+		self.fillTiles.extend(["ValkyrieRoom"]*4)
+		self.fillTiles.extend(["OgreRoom"]*2)
+		self.fillTiles.extend(["AssassinRoom"]*1)
+		self.fillTiles.extend(["DeathKnightRoom"]*0)
+		self.fillTiles.extend(["GiantRoom"]*0)
+		self.fillTiles.extend(["GreenDragonRoom"]*0)
+		self.fillTiles.extend(["WizardRoom"]*0)
+		
+		self.fillTiles.extend(["FindDaggerRoom"]*8)
+		self.fillTiles.extend(["FindShortSwordRoom"]*4)
+		self.fillTiles.extend(["FindLongSwordRoom"]*2)
+		self.fillTiles.extend(["FindBattleAxeRoom"]*1)
+
+		self.fillTiles.extend(["FindPaddedClothRoom"]*2)
+		self.fillTiles.extend(["FindStuddedLeatherRoom"]*2)
+
+
+		self.fillTiles.extend(["HealRoomWeak"]*8)
+		self.fillTiles.extend(["HealRoomMedium"]*4)
+		self.fillTiles.extend(["HealRoomStrong"]*2)
+		self.fillTiles.extend(["HealRoomSuperior"]*1)
+		self.fillTiles.extend(["HealRoomExtreme"]*0)
 
 
 
 		# Used to fill in to fillTiles when fillTiles pops
-		self.possibleTilesSet = {"Find5GoldRoom", "EmptyCavePath", "OgreRoom", \
-								 "GiantSpiderRoom", "FindShortSwordRoom", "FindDaggerRoom"}
+		self.possibleTilesSet = {"Find5GoldRoom", "EmptyCavePath", "BanditRoom", "GiantSpiderRoom",\
+								 "ValkyrieRoom", "OgreRoom", "AssassinRoom",\
+								 "DeathKnightRoom", "GiantRoom", "GreenDragonRoom", "WizardRoom",\
+								 "FindShortSwordRoom", "FindDaggerRoom",\
+								 "FindLongSwordRoom", "FindBattleAxeRoom",\
+								 "FindPaddedClothRoom", "FindStuddedLeatherRoom",\
+								 "HealRoomWeak", "HealRoomMedium", "HealRoomStrong",\
+								 "HealRoomSuperior", "HealRoomExtreme"}
 
 
 

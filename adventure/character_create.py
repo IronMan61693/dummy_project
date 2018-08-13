@@ -144,7 +144,7 @@ class CharacterCreateWidget(QWidget):
 
 		self.smallImageLabel = QLabel()
 
-		self.inventoryLabel = QLabel("No class starts with a fist")
+		self.inventoryLabel = QLabel("Ever class starts with a fist and shredded rags")
 
 
 

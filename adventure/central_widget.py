@@ -1,3 +1,6 @@
+import webbrowser
+
+
 from PyQt5.QtWidgets import QWidget, QStackedWidget, QMessageBox, QInputDialog
 from PyQt5.QtCore import pyqtSignal, Qt
 
@@ -36,7 +39,9 @@ class CentralWidget(QWidget):
 		unstuckCharacter() Uses game unstickCharacter and displays a message box to inform the character
 		showHelpfulInfo() Uses messagebox to display useful UI information.
 		createTables() Uses sqlite to initialize tables in db if they do not exist already
-		uploadGameInfo() Uses sqlite to upload character information to engine.db		
+		uploadGameInfo() Uses sqlite to upload character information to engine.db	
+		launchWeb() Uses webbrowser to open the website at the base url	
+		launchWebTopScore() Uses webbrowser to open the website at the top score url	
 	"""
 	procShowMenu = pyqtSignal()
 
@@ -169,10 +174,16 @@ class CentralWidget(QWidget):
 		# Return 0 if empty
 		# Return 1 if loot room with lootable
 		# Return 2 if loot room already looted
-		# Return 3 if ogre room with active enemy
-		# Return 4 if ogre killed
-		# Return 5 if spider active
-		# 6 if spider dead
+		# Return 3 if enemy defeated
+		# Return 4 if ogre 
+		# Return 5 if spider 
+		# Return 6 if bandit
+		# Return 7 if valkyrie
+		# Return 8 if assassin
+		# Return 9 if deathknight
+		# Return 10 if giant
+		# Return 11 if greendragon
+		# Return 12 if wizard
 
 		if (self.roomType == 0):
 			self.baseGraphicWorldTileWidget.empty_room()
@@ -184,33 +195,55 @@ class CentralWidget(QWidget):
 			self.baseGraphicWorldTileWidget.room_looted()
 
 		elif (self.roomType == 3):
-			self.baseGraphicWorldTileWidget.active_ogre()
+			self.baseGraphicWorldTileWidget.defeated_enemy()
 
 		elif (self.roomType == 4):
-			self.baseGraphicWorldTileWidget.dead_ogre()
+			self.baseGraphicWorldTileWidget.active_ogre()
 
 		elif (self.roomType == 5):
 			self.baseGraphicWorldTileWidget.active_spider()
 
 		elif (self.roomType == 6):
-			self.baseGraphicWorldTileWidget.dead_spider()
+			self.baseGraphicWorldTileWidget.active_bandit()
 
+		elif (self.roomType == 7):
+			self.baseGraphicWorldTileWidget.active_valkyrie()
+
+		elif (self.roomType == 8):
+			self.baseGraphicWorldTileWidget.active_assassin()
+
+		elif (self.roomType == 9):
+			self.baseGraphicWorldTileWidget.active_deathknight()
+
+		elif (self.roomType == 10):
+			self.baseGraphicWorldTileWidget.active_giant()
+
+		elif (self.roomType == 11):
+			self.baseGraphicWorldTileWidget.active_greendragon()
+
+		elif (self.roomType == 12):
+			self.baseGraphicWorldTileWidget.active_wizard()
+
+		
 		elif (self.roomType == -1):
 			self.baseGraphicWorldTileWidget.empty_room()
 			GameOverString = ("Game Over!\n"
 							  "Remember under File you can upload this character to the website for others to see how"
-							  " far you have made it!")
+							  " far you have made it! Click Ok to view the leaderboard")
 
 			GameOverMessageBox = QMessageBox()
 			GameOverMessageBox.setIcon(QMessageBox.Critical)
 			GameOverMessageBox.setText(GameOverString)
 			GameOverMessageBox.setWindowTitle("GAME OVER")
-			GameOverMessageBox.setStandardButtons(QMessageBox.Ok)
+			GameOverMessageBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
 
-			GameOverMessageBox.exec_()
+			gameOverReply = GameOverMessageBox.exec_()
 
+			if (gameOverReply == QMessageBox.Ok):
+				self.launchWebTopScore()
+				print("Ok")
 
-
+			
 		self.baseGraphicWorldTileWidget.set_room_description(self.tileDescription, self.game.getMoved(),\
 															 self.actionDescription)
 
@@ -279,22 +312,32 @@ class CentralWidget(QWidget):
 		"""
 		Uses QInputDialog to choose which equipment slot to update in the game
 		"""
-		equipmentSlots = (["MainHand"])
+		equipmentSlots = (["MainHand", "Armor"])
 		# , "OffHand", "Armor", "Ring", "Amulet"
 		equipmentSlot, okPressed = QInputDialog.getItem(self, "Choose Slot", "Equipment Slot:", equipmentSlots, 0, False)
 		if okPressed:
 			if equipmentSlot == "MainHand":
 				self.changeEquipmentMainHand()
+			elif equipmentSlot == "Armor":
+				self.changeEquipmentArmor()
 
 	def changeEquipmentMainHand(self):
 		"""
 		Uses QInputDialog to choose which item to equip in the mainhand and update in the game
 		"""
 		mainHandSlots = tuple(self.game.mainHandOptions())
-		mainHandSlot, okPressed = QInputDialog.getItem(self, "Choose Item", "Weapons Available:", mainHandSlots, 0, False)
+		mainHandSlot, okPressed = QInputDialog.getItem(self, "Choose MainHand", "Weapons Available:", mainHandSlots, 0, False)
 		if okPressed:
 			self.game.equipMainHand(mainHandSlot)
 
+	def changeEquipmentArmor(self):
+		"""
+		Uses QInputDialog to choose which item to equip for armor and update in the game
+		"""
+		armorSlots = tuple(self.game.armorOptions())
+		armorSlot, okPressed = QInputDialog.getItem(self, "Choose Armor", "Armor Available:", armorSlots, 0, False)
+		if okPressed:
+			self.game.equipArmor(armorSlot)
 
 	def unstuckCharacter(self):
 		"""
@@ -367,3 +410,14 @@ class CentralWidget(QWidget):
 		self.database.execute(command_upload_current, current_game_info)
 
 
+	def launchWeb(self):
+		""" 
+		The website is opened up in the users default browser
+		"""
+		webbrowser.open_new("http://127.0.0.1:5000")
+
+	def launchWebTopScore(self):
+		""" 
+		The website is opened up in the users default browser
+		"""
+		webbrowser.open_new("http://127.0.0.1:5000/score")

@@ -266,12 +266,12 @@ class BaseGraphicWorldTileWidget (QWidget):
 		Input:
 			infoString <str>
 		"""
+		
+		vScrollBar = self.scrollingInfoProvidingPlainTextEdit.verticalScrollBar()
+
 		self.scrollingInfoProvidingPlainTextEdit.appendPlainText(infoString)
-
-
-
-
-
+		vScrollBar.setValue(vScrollBar.maximum())
+	
 
 
 
@@ -359,6 +359,14 @@ class BaseGraphicWorldTileWidget (QWidget):
 		self.set_interactableLootLabel(self.imagePath)
 
 
+	def defeated_enemy(self):
+		"""
+		Uses set_interactableEnemyLabel to set the interactableLabel to a dead ogre image
+		"""
+
+		self.imagePath = "resources/Red_X.png"
+		self.set_interactableEnemyLabel(self.imagePath)
+
 
 	def active_ogre(self):
 		"""
@@ -368,13 +376,7 @@ class BaseGraphicWorldTileWidget (QWidget):
 		self.imagePath = "resources/OgreAlive.png"
 		self.set_interactableEnemyLabel(self.imagePath)
 
-	def dead_ogre(self):
-		"""
-		Uses set_interactableEnemyLabel to set the interactableLabel to a dead ogre image
-		"""
-
-		self.imagePath = "resources/OgreDead.jpg"
-		self.set_interactableEnemyLabel(self.imagePath)
+	
 
 	def active_spider(self):
 		"""
@@ -384,10 +386,65 @@ class BaseGraphicWorldTileWidget (QWidget):
 		self.imagePath = "resources/SpiderAlive.jpg"
 		self.set_interactableEnemyLabel(self.imagePath)
 
-	def dead_spider(self):
+
+
+	def active_bandit(self):
 		"""
-		Uses set_interactableEnemyLabel to set the interactableLabel to an dead spider image
+		Uses set_interactableEnemyLabel to set the interactableLabel to the bandit image
 		"""
 
-		self.imagePath = "resources/SpiderDead.png"
+		self.imagePath = "resources/Bandit.png"
+		self.set_interactableEnemyLabel(self.imagePath)
+
+
+
+	def active_valkyrie(self):
+		"""
+		Uses set_interactableEnemyLabel to set the interactableLabel to the valkyrie image
+		"""
+
+		self.imagePath = "resources/Valkyrie.png"
+		self.set_interactableEnemyLabel(self.imagePath)
+
+
+
+	def active_assassin(self):
+		"""
+		Uses set_interactableEnemyLabel to set the interactableLabel to the assassin image
+		"""
+
+		self.imagePath = "resources/Assassin.png"
+		self.set_interactableEnemyLabel(self.imagePath)
+
+
+	def active_deathknight(self):
+		"""
+		Uses set_interactableEnemyLabel to set the interactableLabel to the deathknight image
+		"""
+
+		self.imagePath = "resources/DeathKnight.jpg"
+		self.set_interactableEnemyLabel(self.imagePath)
+
+	def active_giant(self):
+		"""
+		Uses set_interactableEnemyLabel to set the interactableLabel to the giant image
+		"""
+
+		self.imagePath = "resources/Giant.png"
+		self.set_interactableEnemyLabel(self.imagePath)
+
+	def active_greendragon(self):
+		"""
+		Uses set_interactableEnemyLabel to set the interactableLabel to the greendragon image
+		"""
+
+		self.imagePath = "resources/GreenDragon.png"
+		self.set_interactableEnemyLabel(self.imagePath)
+
+	def active_wizard(self):
+		"""
+		Uses set_interactableEnemyLabel to set the interactableLabel to the wizard image
+		"""
+
+		self.imagePath = "resources/Wizard.png"
 		self.set_interactableEnemyLabel(self.imagePath)

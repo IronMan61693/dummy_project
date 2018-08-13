@@ -15,16 +15,19 @@ class Inventory():
 		 if Item already in inventory updates quantity
 		equip_main_hand() Changes equippedMainHand variable
 		get_main_hand_equipped() Returns equippedMainHand variable
+		equip_armor() Changes equippedArmor variable
+		get_armor_equipped() Returns equippedArmor variable
 		get_all_equipped() Returns tuple for all future equippment slots
 		get_inventory_dict() Returns inventoryDictionary
 		get_main_hand_options() Return list for all weapons with True main_hand
+		get_armor_options() Return list for all armor items in inventory
 		print_inventory() A print statement for the inventory
 	"""
 	def __init__(self):
 		self.inventoryDictionary = {}
 		self.equippedMainHand = None
 		# self.equippedOffHand = None
-		# self.equippedArmor = None
+		self.equippedArmor = None
 		# self.equippedRing = None
 		# self.equippedAmulet = None
 		self.coin_pouch = Items.CoinPouch()
@@ -89,7 +92,39 @@ class Inventory():
 		return False
 
 	def get_main_hand_equipped(self):
+		"""
+		Returns the equippedMainHand variable
+
+		Output:
+			self.equippedMainHand <Weapon>
+		"""
 		return self.equippedMainHand
+
+	def equip_armor(self, armor):
+		"""
+		Changes the equippedArmor variable, returns true if Item was in inventory and 
+		 equipped and false if not
+
+		Input:
+			armor <Armor>
+
+		Output:
+			<bool>
+		"""
+		for key in self.inventoryDictionary:
+			if key.name == armor:
+				self.equippedArmor = key
+				return True
+		return False
+
+	def get_armor_equipped(self):
+		"""
+		Returns the equippedArmor variable
+
+		Output:
+			self.equippedArmor <Armor>
+		"""
+		return self.equippedArmor
 
 	def get_all_equipped(self):
 		"""
@@ -100,7 +135,7 @@ class Inventory():
 			(<Weapon>, <bool>, <bool>, <bool>, <bool>)
 		"""
 		
-		return (self.get_main_hand_equipped(), None, None, None, None)
+		return (self.get_main_hand_equipped(), None, self.get_armor_equipped(), None, None)
 
 	def get_inventory_dict(self):
 		"""
@@ -126,6 +161,20 @@ class Inventory():
 
 		return options
 
+	def get_armor_options(self):
+		"""
+		Return list for all Items in inventory that are of class Armor
+
+		Output:
+			options[<Weapon>]
+		"""
+		options = []
+		for arm in self.inventoryDictionary:
+			if isinstance(arm, Items.Armor):
+				options.append(arm.name)
+
+		return options
+
 	def print_inventory(self):
 		"""
 		A print statement for the inventory
@@ -136,5 +185,6 @@ class Inventory():
 
 		print("Currently equipped: ")
 		print("Main Hand: " + self.equippedMainHand.name)
+		print("Armor: " + self.equippedArmor.name)
 
 

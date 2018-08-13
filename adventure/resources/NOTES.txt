@@ -1,24 +1,25 @@
 NOTES for game
 
-Current project:
-	- Game over upload messagebox
-	- Need QDialog and QMessageBox
-		-Will use to display: 
-			-Character info (c press or openable from menu) <- Use QDialog box and lay out better
-			-Inventory info (i press or openable from menu) <- Use QDialog box and lay out better
 
-	- Splash page with a help intro
+Current project:
+	-Create moonsword
+
 
 
 On Deck:
-	-GameOver room cause pop up to upload game info
 	-Add stuff to GUI
+		-Need QDialog and QMessageBox
+		-Will use to display: 
+			-Character info (c press or openable from menu) <- Use QDialog box and lay out better
+			-Inventory info (i press or openable from menu) <- Use QDialog box and lay out better
+			
 		-Splash page on the front saying Dom's Super Dope RPG
 		- Reorganize character select, take out dialog box, and move things around
 		-Message box that has room description on entering room
 		-A pop up message box on c click that has character info
 		-A pop up Dialog box which is interactable (doesn't do anything yet) for inventory
 		-Menu bar with Character, Inventory, Save(Useless), Load(Useless), and Quit to menu, Quit to exit.
+	-Spells or every number of tiles maybe? or just really flesh out more enemies and weapons
 
 	
 
@@ -40,7 +41,7 @@ GUI:
 		- Get rid of Enter background, it is useless
 
 Combat:
-	-Introduce Armor Class and to hit commun function
+	-Introduce Armor Class and to hit common function
 	-Introduce more variables to weapon items (die damage) and main attribute and 1 or two handed
 	-More options than attack
 	-Armor

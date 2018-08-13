@@ -254,9 +254,26 @@ class playClass():
 		Returns list of Weapons with main hand bool True
 
 		Output:
-			<bool>
+			[<Weapon>]
 		"""
 		return self.player.inventory.get_main_hand_options()
+
+	def equipArmor(self, armor):
+		"""
+		Sets player armor equal to equipped armor in inventory
+		"""
+		if self.player.inventory.equip_armor(armor):
+			self.player.armor = self.player.inventory.get_armor_equipped()
+			self.player.ArmorClass = self.player.armor.AC
+
+	def armorOptions(self):
+		"""
+		Returns list of Armor 
+
+		Output:
+			[<Armor>]
+		"""
+		return self.player.inventory.get_armor_options()
 
 	def inCombat(self):
 		"""
