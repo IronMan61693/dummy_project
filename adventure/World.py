@@ -57,12 +57,16 @@ class WorldClass(object):
 		self.fillTiles.extend(["WizardRoom"]*0)
 		
 		self.fillTiles.extend(["FindDaggerRoom"]*8)
-		self.fillTiles.extend(["FindShortSwordRoom"]*4)
+		self.fillTiles.extend(["FindShortSwordRoom"]*6)
+		self.fillTiles.extend(["FindQuarterStaffRoom"]*4)
 		self.fillTiles.extend(["FindLongSwordRoom"]*2)
 		self.fillTiles.extend(["FindBattleAxeRoom"]*1)
 
-		self.fillTiles.extend(["FindPaddedClothRoom"]*2)
-		self.fillTiles.extend(["FindStuddedLeatherRoom"]*2)
+		self.fillTiles.extend(["FindPaddedClothRoom"]*8)
+		self.fillTiles.extend(["FindStuddedLeatherRoom"]*6)
+		self.fillTiles.extend(["FindChainShirtRoom"]*4)
+		self.fillTiles.extend(["FindRingMailRoom"]*2)
+		self.fillTiles.extend(["FindFullPlateRoom"]*1)
 
 
 		self.fillTiles.extend(["HealRoomWeak"]*8)
@@ -74,12 +78,15 @@ class WorldClass(object):
 
 
 		# Used to fill in to fillTiles when fillTiles pops
-		self.possibleTilesSet = {"Find5GoldRoom", "EmptyCavePath", "BanditRoom", "GiantSpiderRoom",\
-								 "ValkyrieRoom", "OgreRoom", "AssassinRoom",\
-								 "DeathKnightRoom", "GiantRoom", "GreenDragonRoom", "WizardRoom",\
-								 "FindShortSwordRoom", "FindDaggerRoom",\
+		self.possibleTilesSet = {"Find5GoldRoom", "EmptyCavePath",\
+								 "BanditRoom", "GiantSpiderRoom", "ValkyrieRoom",\
+								 "OgreRoom", "AssassinRoom", "DeathKnightRoom",\
+								 "GiantRoom", "GreenDragonRoom", "WizardRoom",\
+								 "FindShortSwordRoom", "FindDaggerRoom", "FindQuarterStaffRoom",\
 								 "FindLongSwordRoom", "FindBattleAxeRoom",\
 								 "FindPaddedClothRoom", "FindStuddedLeatherRoom",\
+								 "FindMoonSwordRoom",\
+								 "FindChainShirtRoom", "FindRingMailRoom", "FindFullPlateRoom",\
 								 "HealRoomWeak", "HealRoomMedium", "HealRoomStrong",\
 								 "HealRoomSuperior", "HealRoomExtreme"}
 

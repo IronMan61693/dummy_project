@@ -136,7 +136,7 @@ class webDBManager(object):
 
 
 
-	def topTenScores(self):
+	def topScores(self):
 		"""
 		Uses sqlite to take ten of the rows by the top tile counts from the game table
 
@@ -145,13 +145,13 @@ class webDBManager(object):
 		"""
 		show_scores_string = ("SELECT * FROM gameInfo"
 							  " ORDER BY tiles DESC"
-							  " LIMIT 10;"
+							  " ;"
 							 )
 		top_ten = self.webDatabase.fetch_all_execute(show_scores_string)
 		return top_ten
 
 
-	def topTenScoresForPlayer(self, username):
+	def topScoresForPlayer(self, username):
 		"""
 		Uses sqlite to take ten rows from the game table for a given username
 
@@ -164,7 +164,7 @@ class webDBManager(object):
 		show_scores_string = ("SELECT * FROM gameInfo"
 							  " WHERE player_name='{0}'"
 							  " ORDER BY tiles DESC"
-							  " LIMIT 10;".format(username)
+							  " ;".format(username)
 							 )
 		top_ten = self.webDatabase.fetch_all_execute(show_scores_string)
 		if top_ten is not None:

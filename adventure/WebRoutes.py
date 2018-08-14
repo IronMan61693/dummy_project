@@ -21,9 +21,9 @@ def home_page():
 # Given the base url sets the extension /score to the html code as described WebScores.html
 @route_page.route('/score')
 def score_page():
-	ten_scores = dataCheck.topTenScores()
+	top_scores = dataCheck.topScores()
 	
-	return render_template("WebScores.html", title='Score Page', ten_scores = ten_scores)
+	return render_template("WebScores.html", title='Score Page', top_scores = top_scores)
 
 
 # Given the base url sets the extension /login to the html code as described WebLogin.html
@@ -92,7 +92,7 @@ def register_page():
 @route_page.route('/characters')
 def characters_page():
 	if current_user.is_authenticated:
-		char_scores = dataCheck.topTenScoresForPlayer(current_user.username)
+		char_scores = dataCheck.topScoresForPlayer(current_user.username)
 		return render_template("WebCharacter.html", title='Character Page', char_scores = char_scores)
 
 	else:

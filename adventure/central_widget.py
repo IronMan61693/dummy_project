@@ -1,13 +1,14 @@
 import webbrowser
 
 
-from PyQt5.QtWidgets import QWidget, QStackedWidget, QMessageBox, QInputDialog
+from PyQt5.QtWidgets import QWidget, QStackedWidget, QMessageBox, QInputDialog, QDialog, QVBoxLayout, QFormLayout, QLabel, QPushButton
 from PyQt5.QtCore import pyqtSignal, Qt
 
 from character_create import CharacterCreateWidget
 from base_graphic_worldtile import BaseGraphicWorldTileWidget
 
 from Game import playClass
+import Items
 from database import DataBase
 
 
@@ -228,8 +229,9 @@ class CentralWidget(QWidget):
 		elif (self.roomType == -1):
 			self.baseGraphicWorldTileWidget.empty_room()
 			GameOverString = ("Game Over!\n"
+							  "You made it {} tiles this go!\n"
 							  "Remember under File you can upload this character to the website for others to see how"
-							  " far you have made it! Click Ok to view the leaderboard")
+							  " far you have made it! Click Ok to view the leaderboard".format(self.game.world.how_many_tile()))
 
 			GameOverMessageBox = QMessageBox()
 			GameOverMessageBox.setIcon(QMessageBox.Critical)
@@ -263,48 +265,131 @@ class CentralWidget(QWidget):
 
 	def showCharacterInfo(self):
 		"""
-		Uses QMessageBox to display character information pulled from game
+		Uses QDialog to display character information pulled from game
 		"""
 		charInfo = self.game.submitGameInfo()
-		charInfoString = "Player: " + str(charInfo[0]) + "\n" + \
-						 "Character: " + str(charInfo[1]) + "\n" + \
-						 "Health Points: " + str(self.game.player.hp) + "\n" + \
-						 "Class: " + str(charInfo[2]) + "\n" + \
-						 "Level: " + str(charInfo[3]) + "\n" + \
-						 "Total Tiles: " + str(charInfo[4]) 
 
-		charInfoMessageBox = QMessageBox()
-		charInfoMessageBox.setIcon(QMessageBox.Question)
-		charInfoMessageBox.setText(charInfoString)
-		charInfoMessageBox.setWindowTitle("Your Information")
-		charInfoMessageBox.setStandardButtons(QMessageBox.Ok)
+		charInfoDialog = QDialog()
+		charInfoDialog.setWindowTitle("Character")
+		charDialogQVBoxLayout = QVBoxLayout()
+		charDialogFormLayout = QFormLayout()
 
-		charInfoMessageBox.exec_()
+		playerNameLabel = QLabel(str(charInfo[0]))
+		characterNameLabel = QLabel(str(charInfo[1]))
+		hPLabel = QLabel(str(self.game.player.hp))
+		classLabel = QLabel(str(charInfo[2]))
+		levelLabel = QLabel(str(charInfo[3]))
+		tileLabel = QLabel(str(charInfo[4]))
+
+		charDialogFormLayout.addRow("Player", playerNameLabel)
+		charDialogFormLayout.addRow("Character", characterNameLabel)
+		charDialogFormLayout.addRow("Health Points", hPLabel)
+		charDialogFormLayout.addRow("Class", classLabel)
+		charDialogFormLayout.addRow("Level", levelLabel)
+		charDialogFormLayout.addRow("Tiles", tileLabel)
+
+		okPushButton = QPushButton("Ok")
+		okPushButton.clicked.connect(charInfoDialog.accept)
+
+		charDialogQVBoxLayout.addLayout(charDialogFormLayout)
+		charDialogQVBoxLayout.addWidget(okPushButton)
+
+		charInfoDialog.setLayout(charDialogQVBoxLayout)
+
+		if (charInfoDialog.exec() == charInfoDialog.Accepted):
+			pass
+
+
 
 
 	def showInventoryInfo(self):
 		"""
-		Uses QMessageBox to display inventory information pulled from game
+		Uses QDialog to display inventory information pulled from game
 		"""
+
 		inventoryInfo = self.game.currentInventoryDictionary()
 		equippedInfo = self.game.currentEquippedAll()
-		inventoryInfoString = "Current Inventory \n"
+
+		weaponString = ""
+		armorString = ""
+		miscString = ""
+		equippedString = ""
+
 		for item, amount in inventoryInfo.items():
-			inventoryInfoString = (inventoryInfoString + "Item: " + item.name + " Quantity: " + str(amount) + "\n")
-			inventoryInfoString = (inventoryInfoString + item.description + "\n")
-		inventoryInfoString = inventoryInfoString + "Currently equipped: \n"
+			if isinstance(item, Items.Weapon):
+				weaponString += (item.name + ": Quantity: " + str(amount) + "\n" + item.description + "\n\n")
+
+			elif isinstance(item, Items.Armor):
+				armorString += (item.name + ": Quantity: " + str(amount) + "\n" + item.description + "\n\n")
+
+			else:
+				miscString += (item.name + ": Quantity: " + str(amount) + "\n" + item.description + "\n\n\n")
+
 		for equipped in equippedInfo:
 			if equipped is not None:
-				inventoryInfoString = (inventoryInfoString + equipped.name + "\n")
+				equippedString += equipped.name + "\n"
+
+		
 
 
-		invInfoMessageBox = QMessageBox()
-		invInfoMessageBox.setIcon(QMessageBox.Question)
-		invInfoMessageBox.setText(inventoryInfoString)
-		invInfoMessageBox.setWindowTitle("Your Inventory")
-		invInfoMessageBox.setStandardButtons(QMessageBox.Ok)
+		invInfoDialog = QDialog()
+		invInfoDialog.setWindowTitle("Inventory")
+		invDialogVBoxLayout = QVBoxLayout()
 
-		invInfoMessageBox.exec_()
+
+		weaponLabel = QLabel()
+		weaponLabel.setText("Weapons: ")
+		weaponLabel.setAlignment(Qt.AlignCenter)
+
+		weaponStringLabel = QLabel()
+		weaponStringLabel.setText(weaponString)
+
+		armorLabel = QLabel()
+		armorLabel.setText("Armor: ")
+		armorLabel.setAlignment(Qt.AlignCenter)
+
+		armorStringLabel = QLabel()
+		armorStringLabel.setText(armorString)
+
+		miscLabel = QLabel()
+		miscLabel.setText("Miscellaneous")
+		miscLabel.setAlignment(Qt.AlignCenter)
+
+		miscStringLabel = QLabel()
+		miscStringLabel.setText(miscString)
+
+		equippedLabel = QLabel()
+		equippedLabel.setText("Equipped")
+		equippedLabel.setAlignment(Qt.AlignCenter)
+
+		equippedStringLabel = QLabel()
+		equippedStringLabel.setText(equippedString)
+
+		okPushButton = QPushButton("Ok")
+		okPushButton.clicked.connect(invInfoDialog.accept)
+
+
+	
+		invDialogVBoxLayout.addWidget(weaponLabel)
+		invDialogVBoxLayout.addWidget(weaponStringLabel)
+		
+		invDialogVBoxLayout.addWidget(armorLabel)
+		invDialogVBoxLayout.addWidget(armorStringLabel)
+		
+		invDialogVBoxLayout.addWidget(miscLabel)
+		invDialogVBoxLayout.addWidget(miscStringLabel)
+
+		invDialogVBoxLayout.addWidget(equippedLabel)
+		invDialogVBoxLayout.addWidget(equippedStringLabel)
+
+		invDialogVBoxLayout.addWidget(okPushButton)
+
+
+		invInfoDialog.setLayout(invDialogVBoxLayout)
+
+		if (invInfoDialog.exec() == invInfoDialog.Accepted):
+			pass
+
 
 
 

@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QFrame, QLabel, QPushButton, QSizePolicy, QVBoxLayout, QHBoxLayout, QMessageBox, QPlainTextEdit
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QPixmap, QImage, QKeyEvent
+from PyQt5.QtGui import QPixmap, QImage, QKeyEvent, QIcon
 
 
 
@@ -19,7 +19,7 @@ class BaseGraphicWorldTileWidget (QWidget):
 		middleInnerLayout <QHBoxLayout>
 		bottomInnerLayout <QVBoxLayout>
 		rightSideLayout <QVBoxLayout
-		holdCharacterInteractionLayout <QVBoxLayout
+		holdCharacterInteractionLayout <QVBoxLayout>
 
 		playerLabel <QLabel>
 		interactableLabel <QLabel>
@@ -63,7 +63,7 @@ class BaseGraphicWorldTileWidget (QWidget):
 		self.addUsefulLayout = QHBoxLayout(self.gameBorderFrame)
 
 		self.mainInnerLayout = QVBoxLayout()
-		self.topInnerLayout = QVBoxLayout()
+		self.topInnerLayout = QHBoxLayout()
 		self.middleInnerLayout = QHBoxLayout()
 		self.bottomInnerLayout = QVBoxLayout()
 
@@ -110,7 +110,7 @@ class BaseGraphicWorldTileWidget (QWidget):
 		######################################################################################################
 
 		self.doorImage = QImage("resources/Door.png")
-		self.doorImage = self.doorImage.scaled(35,35)
+		self.doorImage = self.doorImage.scaled(45,45)
 
 		self.doorPixmap = QPixmap(self.doorImage)
 
@@ -141,7 +141,9 @@ class BaseGraphicWorldTileWidget (QWidget):
 		# re-Parenting topInnerLayout
 		######################################################################################################
 
+		self.topInnerLayout.addStretch(1)
 		self.topInnerLayout.addWidget(self.topDoorLabel)
+		self.topInnerLayout.addStretch(1)
 		
 		######################################################################################################
 		# re-Parenting middleInnerLayout

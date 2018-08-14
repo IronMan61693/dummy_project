@@ -103,7 +103,7 @@ class Valkyrie(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Valkyrie", hp=dice_roller(2,12,4), weapon = Items.BattleAxe(), dmg_mod = 3, armor = Items.PaddedCloth())
+		super().__init__(name="Valkyrie", hp=dice_roller(2,12,10), weapon = Items.BattleAxe(), dmg_mod = 3, armor = Items.PaddedCloth())
 
 class Assassin(Enemy):
 	"""

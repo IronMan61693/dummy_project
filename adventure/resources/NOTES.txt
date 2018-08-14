@@ -2,11 +2,12 @@ NOTES for game
 
 
 Current project:
-	-Create moonsword
+	- Make doors pushbuttons
 
 
 
 On Deck:
+	
 	-Add stuff to GUI
 		-Need QDialog and QMessageBox
 		-Will use to display: 

@@ -618,7 +618,7 @@ class ValkyrieRoom(EnemyRoom):
 		if (self.enemy.is_alive()):
 			self.room_type = 7
 			intro_description = ("A burly woman like barbarian charges at you!\n"\
-								 "She screams 'Meet the sword of a valkyrie!'\n")
+								 "She screams 'Meet the axe of a valkyrie!'\n")
 
 		else:
 			self.room_type = 3
@@ -1066,6 +1066,56 @@ class FindShortSwordRoom(LootRoom):
 
 		return intro_description
 
+
+
+class FindQuarterStaffRoom(LootRoom):
+	"""
+	A subclass of the LootRoom
+
+	Variables:
+		Inherited from LootRoom:
+			x <int>
+			y <int>
+			player <Player>
+			room_type <int>
+			adjacent_movements [<Actions>]
+			all_moves [<Actions>]
+			combat <bool>
+			item <Item>
+
+	Methods:
+		Inherited from LootRoom:
+			get_combat() Returns combat variable
+			intro_text() Returns string describing the room
+			modify_player() Calls add_loot
+			adjacent_moves() Returns a list of possible directions the player can move
+			set_available_actions () Appends actions to all_moves
+			add_loot() If the room has not be looted adds the item to player's inventory
+	"""
+	def __init__(self, x, y, player):
+		super().__init__(x, y, player, Items.QuarterStaff())
+
+	def intro_text(self):
+		"""
+		Describes the tile as string
+
+		Output: 
+			intro_description <str>
+		"""
+		if (self.item.is_looted()):
+
+			intro_description = ("You still see the hand you took your staff from.\n")
+
+		else:
+			
+			intro_description = ("A quarter staff is still being held by a zombie like hand.\n"\
+							 	 "You carefully make the hand let the staff go.\n")
+
+		return intro_description
+
+
+
+
 class FindLongSwordRoom(LootRoom):
 	"""
 	A subclass of the LootRoom
@@ -1159,6 +1209,61 @@ class FindBattleAxeRoom(LootRoom):
 
 
 
+class FindMoonSwordRoom(LootRoom):
+	"""
+	A subclass of the LootRoom
+
+	Variables:
+		Inherited from LootRoom:
+			x <int>
+			y <int>
+			player <Player>
+			room_type <int>
+			adjacent_movements [<Actions>]
+			all_moves [<Actions>]
+			combat <bool>
+			item <Item>
+
+	Methods:
+		Inherited from LootRoom:
+			get_combat() Returns combat variable
+			intro_text() Returns string describing the room
+			modify_player() Calls add_loot
+			adjacent_moves() Returns a list of possible directions the player can move
+			set_available_actions () Appends actions to all_moves
+			add_loot() If the room has not be looted adds the item to player's inventory
+	"""
+	def __init__(self, x, y, player):
+		super().__init__(x, y, player, Items.MoonSword())
+
+	def intro_text(self):
+		"""
+		Describes the tile as string
+
+		Output: 
+			intro_description <str>
+		"""
+		if (self.item.is_looted()):
+
+			intro_description = ("The room still feels saturated with the magic of the sword here.\n")
+
+		else:
+			
+			intro_description = ("An amazing frightful magical aura permeates this room!\n"\
+							 	 "You found a glowing sword floating in the room.\n")
+
+		return intro_description
+
+
+
+
+
+
+
+
+
+
+
 class FindPaddedClothRoom(LootRoom):
 	"""
 	A subclass of the LootRoom
@@ -1249,6 +1354,148 @@ class FindStuddedLeatherRoom(LootRoom):
 
 		return intro_description
 
+
+
+
+class FindChainShirtRoom(LootRoom):
+	"""
+	A subclass of the LootRoom
+
+	Variables:
+		Inherited from LootRoom:
+			x <int>
+			y <int>
+			player <Player>
+			room_type <int>
+			adjacent_movements [<Actions>]
+			all_moves [<Actions>]
+			combat <bool>
+			item <Item>
+
+	Methods:
+		Inherited from LootRoom:
+			get_combat() Returns combat variable
+			intro_text() Returns string describing the room
+			modify_player() Calls add_loot
+			adjacent_moves() Returns a list of possible directions the player can move
+			set_available_actions () Appends actions to all_moves
+			add_loot() If the room has not be looted adds the item to player's inventory
+	"""
+	def __init__(self, x, y, player):
+		super().__init__(x, y, player, Items.ChainShirt())
+
+	def intro_text(self):
+		"""
+		Describes the tile as string
+
+		Output: 
+			intro_description <str>
+		"""
+		if (self.item.is_looted()):
+
+			intro_description = ("You are relieved to know noone was tortured in this room.\n")
+
+		else:
+			
+			intro_description = ("Is that a torture device hanging from the ceiling?\n"
+								 "Ah, nope someone just hung a chain shirt here long ago.\n")
+
+		return intro_description
+
+
+
+
+class FindRingMailRoom(LootRoom):
+	"""
+	A subclass of the LootRoom
+
+	Variables:
+		Inherited from LootRoom:
+			x <int>
+			y <int>
+			player <Player>
+			room_type <int>
+			adjacent_movements [<Actions>]
+			all_moves [<Actions>]
+			combat <bool>
+			item <Item>
+
+	Methods:
+		Inherited from LootRoom:
+			get_combat() Returns combat variable
+			intro_text() Returns string describing the room
+			modify_player() Calls add_loot
+			adjacent_moves() Returns a list of possible directions the player can move
+			set_available_actions () Appends actions to all_moves
+			add_loot() If the room has not be looted adds the item to player's inventory
+	"""
+	def __init__(self, x, y, player):
+		super().__init__(x, y, player, Items.RingMail())
+
+	def intro_text(self):
+		"""
+		Describes the tile as string
+
+		Output: 
+			intro_description <str>
+		"""
+		if (self.item.is_looted()):
+
+			intro_description = ("There is a nice red stain on the floor where the chain mail you have came from.\n")
+
+		else:
+			
+			intro_description = ("What are those rusty metal rings over there?\n"
+								 "Oh it is a full set of ring mail that is weirdly rusty.\n")
+
+		return intro_description
+
+
+
+
+class FindFullPlateRoom(LootRoom):
+	"""
+	A subclass of the LootRoom
+
+	Variables:
+		Inherited from LootRoom:
+			x <int>
+			y <int>
+			player <Player>
+			room_type <int>
+			adjacent_movements [<Actions>]
+			all_moves [<Actions>]
+			combat <bool>
+			item <Item>
+
+	Methods:
+		Inherited from LootRoom:
+			get_combat() Returns combat variable
+			intro_text() Returns string describing the room
+			modify_player() Calls add_loot
+			adjacent_moves() Returns a list of possible directions the player can move
+			set_available_actions () Appends actions to all_moves
+			add_loot() If the room has not be looted adds the item to player's inventory
+	"""
+	def __init__(self, x, y, player):
+		super().__init__(x, y, player, Items.RingMail())
+
+	def intro_text(self):
+		"""
+		Describes the tile as string
+
+		Output: 
+			intro_description <str>
+		"""
+		if (self.item.is_looted()):
+
+			intro_description = ("You remember the oustanding luck to find a complete set of Full Plate here.\n")
+
+		else:
+			
+			intro_description = ("Wow a conveniently placed set of Full Plate, what are the odds.\n")
+
+		return intro_description
 
 
 

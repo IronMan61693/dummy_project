@@ -51,6 +51,17 @@ class Item():
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 class HealingPotion(Item):
 	"""
 	A base class for healing potions, weak 1d6+4, medium 1d8+5, strong 1d10+6, superior 1d12+7, extreme 1d20+8
@@ -168,6 +179,18 @@ class HealingPotionExtreme(HealingPotion):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 class Coin(Item):
 	"""
 	A base class for coins, namely copper silver and gold
@@ -256,6 +279,19 @@ class CoinPouch(Item):
 						 	" and {} gold.".format(self.coins["Copper"], self.coins["Silver"], self.coins["Gold"])
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Weapon(Item):
 	"""
 	Extends the Item class, this will be another base class for all specific
@@ -320,6 +356,7 @@ class Fist(Weapon):
 						 description = "Your bruised and battered fist.",
 						 value_copper = 1,
 						 damage_die_type = 2,
+						 to_hit = 2,
 						 main_hand = True)
 		self.description += " Does {}d{} damage and a +{} to hit.".format(self.quantity_of_die, self.damage_die_type, self.to_hit) 
 
@@ -350,7 +387,7 @@ class ShortSword(Weapon):
 						 value_silver = 10,
 						 main_hand = True,
 						 off_hand = True,
-						 to_hit = 5)
+						 to_hit = 7)
 		self.description += " Does {}d{} damage and a +{} to hit.".format(self.quantity_of_die, self.damage_die_type, self.to_hit) 
 
 
@@ -380,8 +417,39 @@ class Dagger(Weapon):
 						 damage_die_type = 4,
 						 main_hand = True,
 						 off_hand = True,
+						 to_hit = 8)
+		self.description += " Does {}d{} damage and a +{} to hit.".format(self.quantity_of_die, self.damage_die_type, self.to_hit) 
+
+
+
+class QuarterStaff(Weapon):
+	"""
+	Extends the Weapon class
+
+	Variables:
+		Inherited from Weapon:
+			name <str>
+			description <str>
+			value_copper <int>
+			value_silver <int>
+			value_gold <int>
+			looted <bool>
+			quantity_of_die <int>
+			damage_die_type <int>
+			main_hand <bool>
+			off_hand <bool>	
+			to_hit <int>		
+	"""
+	def __init__(self):
+		super().__init__(name = "Quarter Staff",
+						 description = "A solid chunk of wood with iron caps on either end",
+						 value_silver = 7,
+						 damage_die_type = 8,
+						 main_hand = True,
+						 off_hand = True,
 						 to_hit = 6)
 		self.description += " Does {}d{} damage and a +{} to hit.".format(self.quantity_of_die, self.damage_die_type, self.to_hit) 
+
 
 
 
@@ -407,9 +475,9 @@ class BattleAxe(Weapon):
 		super().__init__(name = "Battle Axe",
 						 damage_die_type = 12,
 						 description = "A big and burly axe.",
-						 value_silver = 6,
+						 value_silver = 56,
 						 main_hand = True,
-						 to_hit = 2)
+						 to_hit = 4)
 		self.description += " Does {}d{} damage and a +{} to hit.".format(self.quantity_of_die, self.damage_die_type, self.to_hit) 
 
 
@@ -439,8 +507,42 @@ class LongSword(Weapon):
 						 description = "A typical longsword as seen accompanying knights.",
 						 value_silver = 35,
 						 main_hand = True,
-						 to_hit = 3)
+						 to_hit = 5)
 		self.description += " Does {}d{} damage and a +{} to hit.".format(self.quantity_of_die, self.damage_die_type, self.to_hit) 
+
+
+
+
+
+class MoonSword(Weapon):
+	"""
+	Extends the Weapon class
+
+	Variables:
+		Inherited from Weapon:
+			name <str>
+			description <str>
+			value_copper <int>
+			value_silver <int>
+			value_gold <int>
+			looted <bool>
+			quantity_of_die <int>
+			damage_die_type <int>
+			main_hand <bool>
+			off_hand <bool>	
+			to_hit <int>		
+	"""
+	def __init__(self):
+		super().__init__(name = "Moon Sword",
+						 quantity_of_die = 3,
+						 damage_die_type = 12,
+						 description = "An amazing sword glowing with a purple aura.",
+						 value_gold = 1000,
+						 main_hand = True,
+						 to_hit = 12)
+		self.description += " Does {}d{} damage and a +{} to hit.".format(self.quantity_of_die, self.damage_die_type, self.to_hit) 
+
+
 
 
 
@@ -469,7 +571,7 @@ class Fang(Weapon):
 						 damage_die_type = 6,
 						 main_hand = True,
 						 off_hand = True,
-						 to_hit = 4)
+						 to_hit = 6)
 
 
 
@@ -497,7 +599,7 @@ class MassiveClub(Weapon):
 						 damage_die_type = 8,
 						 main_hand = True,
 						 off_hand = True,
-						 to_hit = 6)
+						 to_hit = 8)
 
 
 
@@ -522,11 +624,11 @@ class WizardStaff(Weapon):
 	"""
 	def __init__(self):
 		super().__init__(name = "Wizard Fireball",
-						 quantity_of_die = 4,
+						 quantity_of_die = 5,
 						 damage_die_type = 6,
 						 main_hand = True,
 						 off_hand = True,
-						 to_hit = 5)
+						 to_hit = 7)
 
 
 
@@ -554,7 +656,9 @@ class PoisonBreath(Weapon):
 						 damage_die_type = 10,
 						 main_hand = True,
 						 off_hand = True,
-						 to_hit = 8)
+						 to_hit = 10)
+
+
 
 
 

@@ -255,6 +255,8 @@ class CharacterCreateWidget(QWidget):
 
 		self.playerNameLineEdit.textChanged.connect(self.playerNameChange)
 
+		self.characterNameLineEdit.textChanged.connect(self.characterNameChange)
+
 		self.classSelectorComboBox.activated[str].connect(self.classChange)
 
 		self.classSelectorComboBox.activated[str].connect(self.classImageChange)
@@ -455,5 +457,18 @@ class CharacterCreateWidget(QWidget):
 		Output: None
 		"""
 		self.player_name = nameText
+
+
+
+	def characterNameChange(self, nameText):
+		"""
+		Changes character_name variable
+
+		Input:
+			nameText <str>
+
+		Output: None
+		"""
+		self.character_name = nameText
 
 

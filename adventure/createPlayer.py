@@ -79,7 +79,7 @@ class Player():
 
 
 		self.weapon = self.inventory.get_main_hand_equipped()
-		self.dmg_mod = 2
+		self.dmg_mod = 4
 
 		self.armor = self.inventory.get_armor_equipped()
 		self.ArmorClass = self.armor.AC
