@@ -381,7 +381,7 @@ class CharacterCreateWidget(QWidget):
 		elif (classNameText == self.nerdString):
 
 			# ~/Documents/py/graphics_Basics/character_select/resources/
-			self.imageResourceString = "resources/questionbox.jpg"
+			self.imageResourceString = "resources/nerd.jpg"
 			
 
 		elif (classNameText == self.rogueString):

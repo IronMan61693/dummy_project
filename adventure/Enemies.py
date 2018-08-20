@@ -56,7 +56,7 @@ class GiantSpider(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Giant Spider", hp=dice_roller(2,8,2), weapon = Items.Fang(), dmg_mod = 1, armor = Items.StuddedLeather())
+		super().__init__(name="Giant Spider", hp=dice_roller(2,10,4), weapon = Items.Fang(), dmg_mod = 3, armor = Items.StuddedLeather())
 
 
 
@@ -72,7 +72,7 @@ class Ogre(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Ogre", hp=dice_roller(2,10,18), weapon = Items.MassiveClub(), dmg_mod = 4, armor = Items.PaddedCloth())
+		super().__init__(name="Ogre", hp=dice_roller(5,10,18), weapon = Items.MassiveClub(), dmg_mod = 4, armor = Items.PaddedCloth())
 
 
 
@@ -88,7 +88,7 @@ class Bandit(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Bandit", hp=dice_roller(2,8,2), weapon = Items.ShortSword(), dmg_mod = 1, armor = Items.PaddedCloth())
+		super().__init__(name="Bandit", hp=dice_roller(1,8,2), weapon = Items.ShortSword(), dmg_mod = 1, armor = Items.PaddedCloth())
 
 
 class Valkyrie(Enemy):
@@ -103,7 +103,7 @@ class Valkyrie(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Valkyrie", hp=dice_roller(2,12,10), weapon = Items.BattleAxe(), dmg_mod = 3, armor = Items.PaddedCloth())
+		super().__init__(name="Valkyrie", hp=dice_roller(7,8,25), weapon = Items.BattleAxe(), dmg_mod = 3, armor = Items.PaddedCloth())
 
 class Assassin(Enemy):
 	"""
@@ -117,7 +117,7 @@ class Assassin(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Assassin", hp=dice_roller(3,8,8), weapon = Items.Dagger(), dmg_mod = 8, armor = Items.StuddedLeather())
+		super().__init__(name="Assassin", hp=dice_roller(10,8,8), weapon = Items.AssassinDagger(), dmg_mod = 8, armor = Items.StuddedLeather())
 
 class DeathKnight(Enemy):
 	"""
@@ -131,7 +131,7 @@ class DeathKnight(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Death Knight", hp=dice_roller(4,10,20), weapon = Items.LongSword(), dmg_mod = 8, armor = Items.FullPlate())
+		super().__init__(name="Death Knight", hp=dice_roller(10,8,12), weapon = Items.DeathSword(), dmg_mod = 12, armor = Items.FullPlate())
 
 class Giant(Enemy):
 	"""
@@ -145,7 +145,7 @@ class Giant(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Giant", hp=dice_roller(3,20,25), weapon = Items.MassiveClub(), dmg_mod = 5, armor = Items.ChainShirt())
+		super().__init__(name="Giant", hp=dice_roller(4,20,25), weapon = Items.MassiveClub(), dmg_mod = 8, armor = Items.ChainShirt())
 
 
 class GreenDragon(Enemy):
@@ -160,7 +160,7 @@ class GreenDragon(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Green Dragon", hp=dice_roller(5,12,15), weapon = Items.PoisonBreath(), dmg_mod = 10, armor = Items.FullPlate())
+		super().__init__(name="Green Dragon", hp=dice_roller(11,12,15), weapon = Items.PoisonBreath(), dmg_mod = 18, armor = Items.FullPlate())
 
 
 
@@ -176,7 +176,7 @@ class Wizard(Enemy):
 			dmg_mod <int>
 	"""
 	def __init__(self):
-		super().__init__(name="Wizard", hp=dice_roller(2,8,5), weapon = Items.WizardStaff(), dmg_mod = 15, armor = Items.PaddedCloth())
+		super().__init__(name="Wizard", hp=dice_roller(16,8,10), weapon = Items.WizardStaff(), dmg_mod = 15, armor = Items.PaddedCloth())
 
 """
 

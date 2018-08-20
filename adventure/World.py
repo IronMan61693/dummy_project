@@ -56,22 +56,22 @@ class WorldClass(object):
 		self.fillTiles.extend(["GreenDragonRoom"]*0)
 		self.fillTiles.extend(["WizardRoom"]*0)
 		
-		self.fillTiles.extend(["FindDaggerRoom"]*8)
-		self.fillTiles.extend(["FindShortSwordRoom"]*6)
-		self.fillTiles.extend(["FindQuarterStaffRoom"]*4)
+		self.fillTiles.extend(["FindDaggerRoom"]*2)
+		self.fillTiles.extend(["FindShortSwordRoom"]*2)
+		self.fillTiles.extend(["FindQuarterStaffRoom"]*2)
 		self.fillTiles.extend(["FindLongSwordRoom"]*2)
-		self.fillTiles.extend(["FindBattleAxeRoom"]*1)
+		self.fillTiles.extend(["FindBattleAxeRoom"]*2)
 
-		self.fillTiles.extend(["FindPaddedClothRoom"]*8)
-		self.fillTiles.extend(["FindStuddedLeatherRoom"]*6)
-		self.fillTiles.extend(["FindChainShirtRoom"]*4)
+		self.fillTiles.extend(["FindPaddedClothRoom"]*2)
+		self.fillTiles.extend(["FindStuddedLeatherRoom"]*2)
+		self.fillTiles.extend(["FindChainShirtRoom"]*2)
 		self.fillTiles.extend(["FindRingMailRoom"]*2)
-		self.fillTiles.extend(["FindFullPlateRoom"]*1)
+		self.fillTiles.extend(["FindFullPlateRoom"]*2)
 
 
-		self.fillTiles.extend(["HealRoomWeak"]*8)
-		self.fillTiles.extend(["HealRoomMedium"]*4)
-		self.fillTiles.extend(["HealRoomStrong"]*2)
+		self.fillTiles.extend(["HealRoomWeak"]*1)
+		self.fillTiles.extend(["HealRoomMedium"]*1)
+		self.fillTiles.extend(["HealRoomStrong"]*1)
 		self.fillTiles.extend(["HealRoomSuperior"]*1)
 		self.fillTiles.extend(["HealRoomExtreme"]*0)
 

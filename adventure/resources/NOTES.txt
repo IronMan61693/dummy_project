@@ -2,19 +2,13 @@ NOTES for game
 
 
 Current project:
-	- Make doors pushbuttons
+	-Splash page on the front saying Dom's Super Dope RPG
 
 
 
 On Deck:
 	
 	-Add stuff to GUI
-		-Need QDialog and QMessageBox
-		-Will use to display: 
-			-Character info (c press or openable from menu) <- Use QDialog box and lay out better
-			-Inventory info (i press or openable from menu) <- Use QDialog box and lay out better
-			
-		-Splash page on the front saying Dom's Super Dope RPG
 		- Reorganize character select, take out dialog box, and move things around
 		-Message box that has room description on entering room
 		-A pop up message box on c click that has character info

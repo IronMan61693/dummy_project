@@ -1478,7 +1478,7 @@ class FindFullPlateRoom(LootRoom):
 			add_loot() If the room has not be looted adds the item to player's inventory
 	"""
 	def __init__(self, x, y, player):
-		super().__init__(x, y, player, Items.RingMail())
+		super().__init__(x, y, player, Items.FullPlate())
 
 	def intro_text(self):
 		"""
